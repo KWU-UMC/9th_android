@@ -1,14 +1,267 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clMusicBanner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/ivHomeMusicBackground"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_music_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivHomeMusicSetting"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_setting"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivHomeMusicPassTicket"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="24dp"
+            android:src="@drawable/ic_ticket"
+            app:layout_constraintBottom_toBottomOf="@id/ivHomeMusicSetting"
+            app:layout_constraintEnd_toStartOf="@id/ivHomeMusicSetting"
+            app:layout_constraintTop_toTopOf="@id/ivHomeMusicSetting" />
+
+        <ImageView
+            android:id="@+id/ivHomeMusicMicrophone"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="24dp"
+            android:src="@drawable/ic_microphone"
+            app:layout_constraintBottom_toBottomOf="@id/ivHomeMusicPassTicket"
+            app:layout_constraintEnd_toStartOf="@id/ivHomeMusicPassTicket"
+            app:layout_constraintTop_toTopOf="@id/ivHomeMusicPassTicket" />
+
+        <TextView
+            android:id="@+id/tvHomeMainTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:text="달밤의 감성 산책"
+            android:textColor="@color/white"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivHomeMusicMicrophone" />
+
+        <TextView
+            android:id="@+id/tvHomeSubTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="총 2곡 2025.09.28"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@id/tvHomeMainTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvHomeMainTitle" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cvMusicAlbumOne"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="0dp"
+            app:layout_constraintStart_toStartOf="@id/tvHomeSubTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvHomeSubTitle">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_album_profile_1" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/tvMusicAlbumOneTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="Lady"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/tvMusicAlbumOneSinger"
+            app:layout_constraintStart_toEndOf="@id/cvMusicAlbumOne"
+            app:layout_constraintTop_toTopOf="@id/cvMusicAlbumOne"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/tvMusicAlbumOneSinger"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kenshi Yonezu"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="@id/cvMusicAlbumOne"
+            app:layout_constraintStart_toStartOf="@id/tvMusicAlbumOneTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvMusicAlbumOneTitle" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cvMusicAlbumTwo"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/cvMusicAlbumOne"
+            app:layout_constraintTop_toBottomOf="@id/cvMusicAlbumOne">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_album_profile_2" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/tvMusicAlbumTwoTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="Spinning Globe"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/tvMusicAlbumTwoSinger"
+            app:layout_constraintStart_toEndOf="@id/cvMusicAlbumTwo"
+            app:layout_constraintTop_toTopOf="@id/cvMusicAlbumTwo"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/tvMusicAlbumTwoSinger"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kenshi Yonezu"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="@id/cvMusicAlbumTwo"
+            app:layout_constraintStart_toStartOf="@id/tvMusicAlbumTwoTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvMusicAlbumTwoTitle" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+        android:id="@+id/dotsIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:dotsColor="#B6B6B6"
+        app:dotsSize="8dp"
+        app:dotsSpacing="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clMusicBanner"
+        app:selectedDotColor="@color/home_selected" />
+
+    <TextView
+        android:id="@+id/tvTodayReleasedMusicTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:text="오늘 발매 음악"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dotsIndicator" />
+
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="4dp"
+        android:src="@drawable/ic_arrow_right"
+        app:layout_constraintBottom_toBottomOf="@id/tvTodayReleasedMusicTitle"
+        app:layout_constraintStart_toEndOf="@id/tvTodayReleasedMusicTitle"
+        app:layout_constraintTop_toTopOf="@id/tvTodayReleasedMusicTitle" />
+
+    <TextView
+        android:id="@+id/tvTodayReleasedMusicForeign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="해외"
+        app:layout_constraintBottom_toBottomOf="@id/tvTodayReleasedMusicTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvTodayReleasedMusicTitle" />
+
+    <TextView
+        android:id="@+id/tvTodayReleasedMusicDomestic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:text="국내"
+        app:layout_constraintBottom_toBottomOf="@id/tvTodayReleasedMusicForeign"
+        app:layout_constraintEnd_toStartOf="@id/tvTodayReleasedMusicForeign"
+        app:layout_constraintTop_toTopOf="@id/tvTodayReleasedMusicForeign" />
+
+    <TextView
+        android:id="@+id/tvTodayReleasedMusicGeneral"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:text="종합"
+        android:textColor="@color/home_selected"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/tvTodayReleasedMusicDomestic"
+        app:layout_constraintEnd_toStartOf="@id/tvTodayReleasedMusicDomestic"
+        app:layout_constraintTop_toTopOf="@id/tvTodayReleasedMusicDomestic" />
+
+    <ImageView
+        android:id="@+id/ivTodayReleasedAlbumOne"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_album_today_released_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTodayReleasedMusicTitle" />
+
+    <TextView
+        android:id="@+id/tvTodayReleasedAlbumOneTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Lost corner"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/ivTodayReleasedAlbumOne"
+        app:layout_constraintTop_toBottomOf="@id/ivTodayReleasedAlbumOne" />
+
+    <TextView
+        android:id="@+id/tvTodayReleasedAlbumOneSinger"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kenshi Yonezu"
+        app:layout_constraintStart_toStartOf="@id/tvTodayReleasedAlbumOneTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvTodayReleasedAlbumOneTitle" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
