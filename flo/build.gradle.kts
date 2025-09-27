@@ -50,4 +50,5 @@ dependencies {
     implementation(libs.androidx.navigation.ui)
     // JSON serialization library, works with the Kotlin serialization plugin
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.dotsindicator)
 }
