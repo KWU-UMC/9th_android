@@ -22,11 +22,67 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/musicPlayerContainer"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="8dp"
+        android:paddingHorizontal="16dp"
         app:layout_constraintTop_toBottomOf="@id/fragmentContainerView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"/>
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView">
+        <TextView
+            android:id="@+id/tvMusicTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pop Song"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+        <TextView
+            android:id="@+id/tvMusicWriter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kenshi Yonezu"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintTop_toBottomOf="@id/tvMusicTitle"
+            app:layout_constraintStart_toStartOf="@id/tvMusicTitle"/>
+        <ImageView
+            android:id="@+id/ivMusicPlayList"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_play_list"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+        <ImageView
+            android:id="@+id/ivMusicPlayNext"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_play_next"
+            android:layout_marginEnd="12dp"
+            app:layout_constraintTop_toTopOf="@id/ivMusicPlayList"
+            app:layout_constraintBottom_toBottomOf="@id/ivMusicPlayList"
+            app:layout_constraintEnd_toStartOf="@id/ivMusicPlayList"/>
+        <ImageView
+            android:id="@+id/ivMusicPlay"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_play"
+            android:layout_marginEnd="12dp"
+            app:layout_constraintTop_toTopOf="@id/ivMusicPlayNext"
+            app:layout_constraintBottom_toBottomOf="@id/ivMusicPlayNext"
+            app:layout_constraintEnd_toStartOf="@id/ivMusicPlayNext"/>
+        <ImageView
+            android:id="@+id/ivMusicPlayPrevious"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_play_previous"
+            android:layout_marginEnd="12dp"
+            app:layout_constraintTop_toTopOf="@id/ivMusicPlay"
+            app:layout_constraintBottom_toBottomOf="@id/ivMusicPlay"
+            app:layout_constraintEnd_toStartOf="@id/ivMusicPlay"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
