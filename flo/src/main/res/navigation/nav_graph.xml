@@ -14,12 +14,20 @@
         android:id="@+id/albumFragment"
         android:name="com.example.flo.AlbumFragment"
         android:label="fragment_album"
-        tools:layout="@layout/fragment_album" />
+        tools:layout="@layout/fragment_album">
+        <argument
+            android:name="AlbumData"
+            app:argType="com.example.flo.AlbumModel"/>
+    </fragment>
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.flo.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_albumFragment"
+            app:destination="@id/albumFragment" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.flo.SearchFragment"

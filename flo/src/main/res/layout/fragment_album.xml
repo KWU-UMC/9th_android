@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Lost corner"
+            tools:text="Lost corner"
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -58,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:text="Kenshi Yonezu"
+            tools:text="Kenshi Yonezu"
             app:layout_constraintEnd_toEndOf="@id/tvAlbumSongTitle"
             app:layout_constraintStart_toStartOf="@id/tvAlbumSongTitle"
             app:layout_constraintTop_toBottomOf="@id/tvAlbumSongTitle" />
@@ -85,10 +85,11 @@
             app:layout_constraintTop_toBottomOf="@id/tvAlbumSongInfo">
 
             <ImageView
+                android:id="@+id/ivAlbumThumbnail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/img_album_today_released_1" />
+                tools:src="@drawable/img_album_today_released_1" />
         </com.google.android.material.card.MaterialCardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
