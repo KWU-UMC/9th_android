@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/ivMusicCollapse"
+        android:id="@+id/ivDetailMusicCollapse"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:src="@drawable/ic_arrow_down"
@@ -25,11 +25,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/ivMusicTitle"
+        android:id="@+id/ivDetailMusicTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
-        android:text="Pop Song"
+        tools:text="Pop Song"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -38,25 +38,25 @@
         app:layout_constraintTop_toBottomOf="@id/ivMusicFilter" />
 
     <TextView
-        android:id="@+id/ivMusicSinger"
+        android:id="@+id/ivDetailMusicSinger"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="Kenshi Yonezu"
+        tools:text="Kenshi Yonezu"
         android:textColor="@color/black"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@id/ivMusicTitle"
-        app:layout_constraintStart_toStartOf="@id/ivMusicTitle"
-        app:layout_constraintTop_toBottomOf="@id/ivMusicTitle" />
+        app:layout_constraintEnd_toEndOf="@id/ivDetailMusicTitle"
+        app:layout_constraintStart_toStartOf="@id/ivDetailMusicTitle"
+        app:layout_constraintTop_toBottomOf="@id/ivDetailMusicTitle" />
 
     <ImageView
         android:layout_width="16dp"
         android:layout_height="16dp"
         android:layout_marginStart="8dp"
         android:src="@drawable/ic_arrow_right"
-        app:layout_constraintBottom_toBottomOf="@id/ivMusicSinger"
-        app:layout_constraintStart_toEndOf="@id/ivMusicSinger"
-        app:layout_constraintTop_toTopOf="@id/ivMusicSinger" />
+        app:layout_constraintBottom_toBottomOf="@id/ivDetailMusicSinger"
+        app:layout_constraintStart_toEndOf="@id/ivDetailMusicSinger"
+        app:layout_constraintTop_toTopOf="@id/ivDetailMusicSinger" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cvMusicAlbum"
@@ -67,7 +67,7 @@
         app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivMusicSinger">
+        app:layout_constraintTop_toBottomOf="@id/ivDetailMusicSinger">
 
         <ImageView
             android:layout_width="match_parent"
