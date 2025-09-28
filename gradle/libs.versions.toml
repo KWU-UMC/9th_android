@@ -9,6 +9,8 @@ espressoCore = "3.7.0"
 appcompat = "1.7.1"
 kotlinxSerializationJson = "1.7.3"
 material = "1.13.0"
+activity = "1.11.0"
+constraintlayout = "2.2.1"
 navigationFragment = "2.9.5"
 
 [libraries]
@@ -23,6 +25,8 @@ androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-co
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
