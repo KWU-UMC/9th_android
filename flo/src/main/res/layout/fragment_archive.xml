@@ -13,7 +13,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/archiveFragmentContainerView">
+        app:layout_constraintBottom_toTopOf="@id/archiveViewPager2">
 
         <TextView
             android:id="@+id/tvArchiveTitle"
@@ -55,23 +55,23 @@
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="저장한곡"/>
+                tools:text="저장한 곡"/>
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="음악파일" />
+                tools:text="음악파일" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="저장앨범" />
+                tools:text="저장앨범" />
         </com.google.android.material.tabs.TabLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/archiveFragmentContainerView"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/archiveViewPager2"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/clArchiveHeader"

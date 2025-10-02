@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import com.example.flo.databinding.FragmentArchiveBinding
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 class ArchiveFragment : Fragment(R.layout.fragment_archive) {
 
@@ -18,32 +19,22 @@ class ArchiveFragment : Fragment(R.layout.fragment_archive) {
     }
 
     private fun initViews() = with(binding) {
-        // default fragment
-        childFragmentManager.beginTransaction().replace(R.id.archiveFragmentContainerView,
-            SaveSongFragment()).commit()
+        // ViewPager2 Adapter 연결
+        archiveViewPager2.adapter = ArchiveAdapter(this@ArchiveFragment)
+
+        // TabLayout 과 ViewPager2 연동
+        TabLayoutMediator(tblArchiveIndicator, archiveViewPager2) { tab, position ->
+            tab.text = when(position) {
+                0 -> "저장한 곡"
+                1 -> "음악파일"
+                2 -> "저장앨범"
+                else -> ""
+            }
+        }.attach()
     }
 
     private fun initListeners() = with(binding) {
-        tblArchiveIndicator.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                when(tab?.position) {
-                    0 -> {
-                        childFragmentManager.beginTransaction().replace(R.id.archiveFragmentContainerView,
-                            SaveSongFragment()).commit()
-                    }
-                    1 -> {
-                        childFragmentManager.beginTransaction().replace(R.id.archiveFragmentContainerView,
-                            SongFileFragment()).commit()
-                    }
-                    2 -> {
-                        childFragmentManager.beginTransaction().replace(R.id.archiveFragmentContainerView,
-                            SaveAlbumFragment()).commit()
-                    }
-                }
-            }
-            override fun onTabUnselected(tab: TabLayout.Tab?) = Unit
-            override fun onTabReselected(tab: TabLayout.Tab?) = Unit
-        })
+
     }
 
 }
