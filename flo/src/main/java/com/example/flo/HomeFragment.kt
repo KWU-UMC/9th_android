@@ -13,7 +13,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHomeBinding.bind(view)
+        initViews()
         initListeners()
+
+    }
+
+    private fun initViews() = with(binding) {
+        viewPager2MusicBanner.adapter = HomeAdapter(this@HomeFragment)
+        // viewpager2 와 indicator 연동하기
+        dotsIndicator.attachTo(viewPager2MusicBanner)
     }
 
     private fun initListeners() = with(binding) {
