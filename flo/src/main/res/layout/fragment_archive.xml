@@ -50,13 +50,11 @@
             app:tabMinWidth="100dp"
             app:tabPaddingEnd="16dp"
             app:tabPaddingStart="16dp"
-            app:tabRippleColor="#2F41E0"
             app:tabSelectedTextColor="#2F41E0">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#8BC34A"
                 android:text="저장한곡"/>
 
             <com.google.android.material.tabs.TabItem
