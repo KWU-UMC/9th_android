@@ -10,4 +10,6 @@
     <color name="secondary_color">#3F51B5</color>
     <color name="background_color">#F0F0F0</color>
     <color name="tab_indicator_color">#2F41E0</color>
+    <color name="ic_state_inactivate">#C1C1C1</color>
+    <color name="ic_state_activate">#000000</color>
 </resources>

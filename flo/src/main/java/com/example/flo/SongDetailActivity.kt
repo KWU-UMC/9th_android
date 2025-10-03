@@ -2,6 +2,7 @@ package com.example.flo
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -11,6 +12,7 @@ import com.example.flo.databinding.ActivitySongDetailBinding
 class SongDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySongDetailBinding
+    private var isShuffleOn: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +45,17 @@ class SongDetailActivity : AppCompatActivity() {
             }
             setResult(RESULT_OK, intent)
             finish()
+        }
+        ivMusicShuffle.setOnClickListener {
+            if(isShuffleOn) {
+                isShuffleOn = false
+                ivMusicShuffle.setColorFilter(R.color.ic_state_inactivate)
+                Toast.makeText(this@SongDetailActivity, "순차적으로 재생됩니다.", Toast.LENGTH_SHORT).show()
+            } else {
+                isShuffleOn = true
+                ivMusicShuffle.setColorFilter(R.color.ic_state_activate)
+                Toast.makeText(this@SongDetailActivity, "무작위로 재생됩니다.", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }
