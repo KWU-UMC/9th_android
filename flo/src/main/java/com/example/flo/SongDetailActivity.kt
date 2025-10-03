@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.flo.databinding.ActivitySongDetailBinding
@@ -49,11 +50,11 @@ class SongDetailActivity : AppCompatActivity() {
         ivMusicShuffle.setOnClickListener {
             if(isShuffleOn) {
                 isShuffleOn = false
-                ivMusicShuffle.setColorFilter(R.color.ic_state_inactivate)
+                ivMusicShuffle.setColorFilter(ContextCompat.getColor(this@SongDetailActivity, R.color.ic_state_inactivate))
                 Toast.makeText(this@SongDetailActivity, "순차적으로 재생됩니다.", Toast.LENGTH_SHORT).show()
             } else {
                 isShuffleOn = true
-                ivMusicShuffle.setColorFilter(R.color.ic_state_activate)
+                ivMusicShuffle.setColorFilter(ContextCompat.getColor(this@SongDetailActivity, R.color.ic_state_activate))
                 Toast.makeText(this@SongDetailActivity, "무작위로 재생됩니다.", Toast.LENGTH_SHORT).show()
             }
         }
