@@ -48,15 +48,11 @@ class SongDetailActivity : AppCompatActivity() {
             finish()
         }
         ivMusicShuffle.setOnClickListener {
-            if(isShuffleOn) {
-                isShuffleOn = false
-                ivMusicShuffle.setColorFilter(ContextCompat.getColor(this@SongDetailActivity, R.color.ic_state_inactivate))
-                Toast.makeText(this@SongDetailActivity, "순차적으로 재생됩니다.", Toast.LENGTH_SHORT).show()
-            } else {
-                isShuffleOn = true
-                ivMusicShuffle.setColorFilter(ContextCompat.getColor(this@SongDetailActivity, R.color.ic_state_activate))
-                Toast.makeText(this@SongDetailActivity, "무작위로 재생됩니다.", Toast.LENGTH_SHORT).show()
-            }
+            isShuffleOn = !isShuffleOn
+            val color = if (isShuffleOn) R.color.ic_state_activate else R.color.ic_state_inactivate
+            val message = if(isShuffleOn) "무작위로 재생됩니다." else "순차적으로 재생됩니다."
+            ivMusicShuffle.setColorFilter(ContextCompat.getColor(this@SongDetailActivity, color))
+            Toast.makeText(this@SongDetailActivity, message, Toast.LENGTH_SHORT).show()
         }
     }
 }
