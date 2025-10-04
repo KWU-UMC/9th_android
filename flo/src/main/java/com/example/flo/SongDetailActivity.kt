@@ -14,6 +14,7 @@ class SongDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySongDetailBinding
     private var isShuffleOn: Boolean = false
+    private var repeatState: MusicRepeatState = MusicRepeatState.NONE
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +26,12 @@ class SongDetailActivity : AppCompatActivity() {
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left + extraPadding, systemBars.top + extraPadding, systemBars.right + extraPadding, systemBars.bottom + extraPadding)
+            v.setPadding(
+                systemBars.left + extraPadding,
+                systemBars.top + extraPadding,
+                systemBars.right + extraPadding,
+                systemBars.bottom + extraPadding
+            )
             insets
         }
         initViews()
@@ -53,6 +59,25 @@ class SongDetailActivity : AppCompatActivity() {
             val message = if(isShuffleOn) "무작위로 재생됩니다." else "순차적으로 재생됩니다."
             ivMusicShuffle.setColorFilter(ContextCompat.getColor(this@SongDetailActivity, color))
             Toast.makeText(this@SongDetailActivity, message, Toast.LENGTH_SHORT).show()
+        }
+        ivMusicRepeat.setOnClickListener {
+            when(repeatState) {
+                MusicRepeatState.NONE -> {
+                    repeatState = MusicRepeatState.ALL
+                    ivMusicRepeat.setImageDrawable(ContextCompat.getDrawable(this@SongDetailActivity, R.drawable.ic_repeat_all_active))
+                    Toast.makeText(this@SongDetailActivity, "전체 음악을 반복합니다.", Toast.LENGTH_SHORT).show()
+                }
+                MusicRepeatState.ALL -> {
+                    repeatState = MusicRepeatState.ONE
+                    ivMusicRepeat.setImageDrawable(ContextCompat.getDrawable(this@SongDetailActivity, R.drawable.ic_repeat_one_inside))
+                    Toast.makeText(this@SongDetailActivity, "현재 음악을 반복합니다.", Toast.LENGTH_SHORT).show()
+                }
+                MusicRepeatState.ONE -> {
+                    repeatState = MusicRepeatState.NONE
+                    ivMusicRepeat.setImageDrawable(ContextCompat.getDrawable(this@SongDetailActivity, R.drawable.ic_repeat_all_inactive))
+                    Toast.makeText(this@SongDetailActivity, "반복을 사용하지 않습니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 }

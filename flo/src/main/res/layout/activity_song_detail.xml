@@ -155,10 +155,10 @@
 
 
     <ImageView
-        android:id="@+id/ivMusicRotate"
+        android:id="@+id/ivMusicRepeat"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:src="@drawable/ic_rotation"
+        android:src="@drawable/ic_repeat_all_inactive"
         android:layout_marginStart="20dp"
         app:layout_constraintVertical_bias="0.4"
         app:layout_constraintTop_toBottomOf="@id/tvSongTimeStart"
@@ -171,9 +171,9 @@
         android:layout_height="24dp"
         android:src="@drawable/ic_play_previous"
         app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toEndOf="@id/ivMusicRotate"
-        app:layout_constraintTop_toTopOf="@id/ivMusicRotate"
-        app:layout_constraintBottom_toBottomOf="@id/ivMusicRotate"
+        app:layout_constraintStart_toEndOf="@id/ivMusicRepeat"
+        app:layout_constraintTop_toTopOf="@id/ivMusicRepeat"
+        app:layout_constraintBottom_toBottomOf="@id/ivMusicRepeat"
         app:layout_constraintEnd_toStartOf="@id/ivMusicPlay"/>
 
     <ImageView
