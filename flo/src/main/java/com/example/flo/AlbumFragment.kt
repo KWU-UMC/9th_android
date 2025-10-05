@@ -2,6 +2,7 @@ package com.example.flo
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.example.flo.databinding.FragmentAlbumBinding
@@ -33,6 +34,10 @@ class AlbumFragment : Fragment(R.layout.fragment_album) {
                 else -> ""
             }
         }.attach()
+    }
+
+    fun changeThumbnailImage(image: Int) {
+        binding.ivAlbumThumbnail.setImageDrawable(ContextCompat.getDrawable(requireContext(), image))
     }
 
 }
