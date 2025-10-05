@@ -46,11 +46,11 @@
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="@id/tvArchiveTitle"
             app:layout_constraintTop_toBottomOf="@id/tvArchiveTitle"
-            app:tabIndicatorColor="#2F41E0"
+            app:tabIndicatorColor="@color/tab_indicator_color"
+            app:tabSelectedTextColor="@color/tab_indicator_color"
             app:tabMinWidth="100dp"
             app:tabPaddingEnd="16dp"
-            app:tabPaddingStart="16dp"
-            app:tabSelectedTextColor="#2F41E0">
+            app:tabPaddingStart="16dp">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
