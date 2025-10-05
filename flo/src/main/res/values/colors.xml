@@ -12,4 +12,6 @@
     <color name="tab_indicator_color">#2F41E0</color>
     <color name="ic_state_inactivate">#C1C1C1</color>
     <color name="ic_state_activate">#000000</color>
+    <color name="switch_track_color">#ADADAD</color>
+    <color name="switch_thumb_color">#FFFFFFFF</color>
 </resources>
