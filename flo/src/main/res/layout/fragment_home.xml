@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment">
+    tools:context=".home.HomeFragment">
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager2MusicBanner"
@@ -82,40 +82,16 @@
         app:layout_constraintEnd_toStartOf="@id/tvTodayReleasedMusicDomestic"
         app:layout_constraintTop_toTopOf="@id/tvTodayReleasedMusicDomestic" />
 
-    <LinearLayout
-        android:id="@+id/llAlbumOne"
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerviewHome"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        tools:layout_height="140dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
-        android:orientation="vertical"
+        tools:listitem="@layout/item_home_today_released_album"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTodayReleasedMusicTitle">
-
-        <ImageView
-            android:id="@+id/ivTodayReleasedAlbumOne"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/img_album_today_released_1" />
-
-        <TextView
-            android:id="@+id/tvTodayReleasedAlbumOneTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="Lost corner"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvTodayReleasedAlbumOneSinger"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Kenshi Yonezu" />
-
-    </LinearLayout>
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTodayReleasedMusicTitle"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
