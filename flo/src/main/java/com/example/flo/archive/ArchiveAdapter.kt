@@ -8,7 +8,7 @@ class ArchiveAdapter(fragment: Fragment): FragmentStateAdapter(fragment) {
         return when(position) {
             0 -> ArchiveSaveTrackFragment()
             1 -> ArchiveTrackFileFragment()
-            2 -> ArchiveSaveTrackFragment()
+            2 -> ArchiveSaveAlbumFragment()
             else -> ArchiveSaveTrackFragment()
         }
     }
