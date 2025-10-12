@@ -5,7 +5,8 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class TrackModel(
+    val trackId: Int? = null,
     val trackTitle: String,
     val trackArtist: String,
-    val trackThumbnail: Int
+    val trackThumbnail: Int? = null
 ): Parcelable

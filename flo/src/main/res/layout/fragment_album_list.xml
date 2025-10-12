@@ -7,6 +7,7 @@
     tools:context=".album.AlbumListFragment">
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvMusicTaste"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -40,5 +41,16 @@
                 app:trackTint="@color/switch_track_color"/>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerviewAlbumList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cvMusicTaste"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:listitem="@layout/item_album_list"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
