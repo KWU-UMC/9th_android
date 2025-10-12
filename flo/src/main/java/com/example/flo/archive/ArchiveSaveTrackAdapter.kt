@@ -9,13 +9,26 @@ import com.example.flo.TrackModel
 import com.example.flo.R
 import com.example.flo.databinding.ItemArchiveSaveTrackBinding
 
-class ArchiveSaveTrackAdapter(private val context: Context, private val trackList: MutableList<TrackModel>): RecyclerView.Adapter<ArchiveSaveTrackAdapter.ViewHolder>() {
+class ArchiveSaveTrackAdapter(private val context: Context, trackList: MutableList<TrackModel>): RecyclerView.Adapter<ArchiveSaveTrackAdapter.ViewHolder>() {
+
+    private var trackLists: MutableList<TrackModel>
+
+    init {
+        this.trackLists = trackList
+    }
 
     inner class ViewHolder(private val binding: ItemArchiveSaveTrackBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: TrackModel) = with(binding) {
             ivArchiveSaveTrackThumbnail.setImageDrawable(ContextCompat.getDrawable(context, item.trackThumbnail ?: R.drawable.img_no_track))
             tvArchiveSaveTrackTitle.text = item.trackTitle
             tvArchiveSaveTrackArtist.text = item.trackArtist
+            ivArchiveSaveTrackOption.setOnClickListener {
+                val position = bindingAdapterPosition
+                if(position != RecyclerView.NO_POSITION) {
+                    trackLists.removeAt(position)
+                    notifyItemRemoved(position)
+                }
+            }
         }
     }
 
@@ -31,11 +44,11 @@ class ArchiveSaveTrackAdapter(private val context: Context, private val trackLis
         holder: ViewHolder,
         position: Int
     ) {
-        holder.bind(trackList[position])
+        holder.bind(trackLists[position])
     }
 
     override fun getItemCount(): Int {
-        return trackList.size
+        return trackLists.size
     }
 
 }
