@@ -46,8 +46,8 @@ class MainActivity : AppCompatActivity() {
     private fun initListeners() = with(binding) {
         musicPlayerContainer.setOnClickListener {
             val intent = Intent(this@MainActivity, SongDetailActivity::class.java).apply {
-                putExtra(TITLE, tvMusicTitle.text.toString())
-                putExtra(SINGER, tvMusicSinger.text.toString())
+                putExtra(TITLE, tvTrackTitle.text.toString())
+                putExtra(SINGER, tvTrackArtist.text.toString())
             }
             getResultFromSongActivity.launch(intent)
         }

@@ -1,18 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="16dp"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginEnd="16dp">
 
     <ImageView
         android:id="@+id/ivTodayReleasedTrack"
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:src="@drawable/img_album_today_released_1" />
+
+    <ImageView
+        android:id="@+id/ivTodayReleasedTrackPlay"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_play"
+        android:layout_margin="12dp"
+        app:layout_constraintBottom_toBottomOf="@id/ivTodayReleasedTrack"
+        app:layout_constraintEnd_toEndOf="@id/ivTodayReleasedTrack"
+        app:tint="@color/white"/>
 
     <TextView
         android:id="@+id/tvTodayReleasedTrackTitle"
@@ -22,13 +33,17 @@
         tools:text="Lost corner"
         android:textColor="@color/black"
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/ivTodayReleasedTrack"
+        app:layout_constraintStart_toStartOf="@id/ivTodayReleasedTrack"/>
 
     <TextView
         android:id="@+id/tvTodayReleasedTrackArtist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Kenshi Yonezu" />
+        tools:text="Kenshi Yonezu"
+        app:layout_constraintTop_toBottomOf="@id/tvTodayReleasedTrackTitle"
+        app:layout_constraintStart_toStartOf="@id/tvTodayReleasedTrackTitle"/>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 

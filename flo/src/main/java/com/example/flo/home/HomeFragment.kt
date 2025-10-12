@@ -2,6 +2,7 @@ package com.example.flo.home
 
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -59,6 +60,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val trackAdapter = HomeTrackAdapter(requireContext(), testTrackList) { track ->
             val action = HomeFragmentDirections.actionHomeFragmentToAlbumFragment(track)
             findNavController().navigate(action)
+            activity?.findViewById<TextView>(R.id.tvTrackTitle)?.text = track.trackTitle
+            activity?.findViewById<TextView>(R.id.tvTrackArtist)?.text = track.trackArtist
         }
         recyclerviewHome.adapter = trackAdapter
         recyclerviewHome.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
