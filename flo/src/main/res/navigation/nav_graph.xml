@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_archive" />
     <fragment
         android:id="@+id/albumFragment"
-        android:name="com.example.flo.AlbumFragment"
+        android:name="com.example.flo.album.AlbumFragment"
         android:label="fragment_album"
         tools:layout="@layout/fragment_album">
         <argument

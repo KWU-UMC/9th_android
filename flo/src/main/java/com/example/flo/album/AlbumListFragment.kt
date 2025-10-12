@@ -1,10 +1,11 @@
-package com.example.flo
+package com.example.flo.album
 
 import android.os.Bundle
 import android.view.View
 import android.widget.CompoundButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.flo.R
 import com.example.flo.databinding.FragmentAlbumListBinding
 
 class AlbumListFragment : Fragment(R.layout.fragment_album_list) {

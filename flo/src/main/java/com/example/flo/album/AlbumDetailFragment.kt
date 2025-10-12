@@ -1,9 +1,10 @@
-package com.example.flo
+package com.example.flo.album
 
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.example.flo.R
 import com.example.flo.databinding.FragmentAlbumDetailBinding
 
 class AlbumDetailFragment : Fragment(R.layout.fragment_album_detail) {
