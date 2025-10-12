@@ -1,10 +1,10 @@
-package com.example.flo
+package com.example.flo.archive
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import com.example.flo.R
 import com.example.flo.databinding.FragmentArchiveBinding
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class ArchiveFragment : Fragment(R.layout.fragment_archive) {

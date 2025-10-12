@@ -1,4 +1,4 @@
-package com.example.flo
+package com.example.flo.archive
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -6,10 +6,10 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 class ArchiveAdapter(fragment: Fragment): FragmentStateAdapter(fragment) {
     override fun createFragment(position: Int): Fragment {
         return when(position) {
-            0 -> SaveSongFragment()
-            1 -> SongFileFragment()
-            2 -> SaveAlbumFragment()
-            else -> SaveSongFragment()
+            0 -> ArchiveSaveTrackFragment()
+            1 -> ArchiveTrackFileFragment()
+            2 -> ArchiveSaveTrackFragment()
+            else -> ArchiveSaveTrackFragment()
         }
     }
 
