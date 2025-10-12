@@ -20,10 +20,11 @@ class AlbumFragment : Fragment(R.layout.fragment_album) {
 
     private fun initViews() = with(binding) {
         val args: AlbumFragmentArgs by navArgs()
-        val albumData = args.albumData
-        tvAlbumSongTitle.text = albumData.title
-        tvAlbumSongSinger.text = albumData.singer
-        ivAlbumThumbnail.setImageResource(albumData.thumbnail)
+        val albumData = args.track ?: TrackModel("기본 제목", "기본 가수", R.drawable.img_no_album_data)
+
+        tvAlbumSongTitle.text = albumData.trackTitle
+        tvAlbumSongSinger.text = albumData.trackArtist
+        ivAlbumThumbnail.setImageResource(albumData.trackThumbnail)
 
         albumViewPager2.adapter = AlbumAdapter(this@AlbumFragment)
         TabLayoutMediator(tblAlbumIndicator, albumViewPager2) { tab, position ->

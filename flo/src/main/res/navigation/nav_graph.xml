@@ -16,12 +16,13 @@
         android:label="fragment_album"
         tools:layout="@layout/fragment_album">
         <argument
-            android:name="AlbumData"
-            app:argType="com.example.flo.AlbumModel"/>
+            android:name="track"
+            app:argType="com.example.flo.TrackModel"
+            app:nullable="true"/>
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.flo.HomeFragment"
+        android:name="com.example.flo.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
