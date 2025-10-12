@@ -5,7 +5,6 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-import com.example.flo.AlbumFragmentArgs
 import com.example.flo.R
 import com.example.flo.TrackModel
 import com.example.flo.databinding.FragmentAlbumBinding
@@ -23,11 +22,11 @@ class AlbumFragment : Fragment(R.layout.fragment_album) {
 
     private fun initViews() = with(binding) {
         val args: AlbumFragmentArgs by navArgs()
-        val albumData = args.track ?: TrackModel("기본 제목", "기본 가수", R.drawable.img_no_album_data)
+        val albumData = args.track ?: TrackModel(trackTitle = "기본 제목", trackArtist = "기본 가수", trackThumbnail = R.drawable.img_no_track)
 
         tvAlbumSongTitle.text = albumData.trackTitle
         tvAlbumSongSinger.text = albumData.trackArtist
-        ivAlbumThumbnail.setImageResource(albumData.trackThumbnail)
+        ivAlbumThumbnail.setImageResource(albumData.trackThumbnail ?: R.drawable.img_no_track)
 
         albumViewPager2.adapter = AlbumAdapter(this@AlbumFragment)
         TabLayoutMediator(tblAlbumIndicator, albumViewPager2) { tab, position ->
