@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray_700">#4B4B4B</color>
     <color name="gray_500">#9B9B9B</color>
+    <color name="gray_200">#CCCCCC</color>
     <color name="secondary_color">#3F51B5</color>
     <color name="background_color">#F0F0F0</color>
     <color name="tab_indicator_color">#2F41E0</color>
