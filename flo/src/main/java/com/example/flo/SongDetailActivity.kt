@@ -87,6 +87,16 @@ class SongDetailActivity : AppCompatActivity() {
                 }
             }
         }
+        ivMusicPlayPrevious.setOnClickListener {
+            mediaPlayer?.stop()
+            mediaPlayer?.prepare()
+            mediaPlayer?.start()
+        }
+        ivMusicPlayNext.setOnClickListener {
+            mediaPlayer?.stop()
+            mediaPlayer?.prepare()
+            mediaPlayer?.start()
+        }
         ivMusicShuffle.setOnClickListener {
             isShuffleOn = !isShuffleOn
             val color = if (isShuffleOn) R.color.ic_state_activate else R.color.ic_state_inactivate
