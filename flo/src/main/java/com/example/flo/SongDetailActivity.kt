@@ -81,6 +81,20 @@ class SongDetailActivity : AppCompatActivity() {
             when(musicState) {
                 MusicState.RELEASE -> {
                     try {
+                        if(mediaPlayer == null) {
+                            mediaPlayer = MediaPlayer.create(this@SongDetailActivity, R.raw.sample).apply {
+                                setOnCompletionListener {
+                                    mediaPlayer?.release()
+                                    mediaPlayer = null
+                                    job?.cancel()
+                                    currentPlayTime = 0
+                                    tvSongTimeStart.text = getFormattedTime(currentPlayTime.toInt())
+                                    musicState = MusicState.RELEASE
+                                    ivMusicPlay.setImageDrawable(ContextCompat.getDrawable(this@SongDetailActivity, R.drawable.ic_play_filled))
+                                    seekbarMusic.progress = 0
+                                }
+                            }
+                        }
                         mediaPlayer?.start()
                         job = lifecycleScope.launch {
                             while (isActive) {
