@@ -62,10 +62,10 @@ class SongDetailActivity : AppCompatActivity() {
                 tvSongTimeStart.text = getFormattedTime(currentPlayTime.toInt())
                 musicState = MusicState.RELEASE
                 ivMusicPlay.setImageDrawable(ContextCompat.getDrawable(this@SongDetailActivity, R.drawable.ic_play_filled))
-                seekbarMusic.progress = 0
+                seekbarDetailMusic.progress = 0
             }
         }
-        seekbarMusic.max = mediaPlayer?.duration ?: 0
+        seekbarDetailMusic.max = mediaPlayer?.duration ?: 0
         tvSongTimeEnd.text = getFormattedTime(mediaPlayer?.duration ?: 0)
     }
 
@@ -90,8 +90,8 @@ class SongDetailActivity : AppCompatActivity() {
                                     currentPlayTime = 0
                                     tvSongTimeStart.text = getFormattedTime(currentPlayTime.toInt())
                                     musicState = MusicState.RELEASE
+                                    seekbarDetailMusic.progress = 0
                                     ivMusicPlay.setImageDrawable(ContextCompat.getDrawable(this@SongDetailActivity, R.drawable.ic_play_filled))
-                                    seekbarMusic.progress = 0
                                 }
                             }
                         }
@@ -100,7 +100,7 @@ class SongDetailActivity : AppCompatActivity() {
                             while (isActive) {
                                 currentPlayTime += 100L
                                 tvSongTimeStart.text = getFormattedTime(currentPlayTime.toInt())
-                                seekbarMusic.progress = mediaPlayer?.currentPosition ?: 0
+                                seekbarDetailMusic.progress = mediaPlayer?.currentPosition ?: 0
                                 delay(100L)
                             }
                         }
@@ -122,7 +122,7 @@ class SongDetailActivity : AppCompatActivity() {
                         while (isActive) {
                             currentPlayTime += 100L
                             tvSongTimeStart.text = getFormattedTime(currentPlayTime.toInt())
-                            seekbarMusic.progress = mediaPlayer?.currentPosition ?: 0
+                            seekbarDetailMusic.progress = mediaPlayer?.currentPosition ?: 0
                             delay(100L)
                         }
                     }

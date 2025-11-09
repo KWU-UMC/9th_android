@@ -1,23 +1,36 @@
 package com.example.flo
 
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.example.flo.SongDetailActivity
 import com.example.flo.databinding.ActivityMainBinding
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
+import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var getResultFromSongActivity: ActivityResultLauncher<Intent>
+
+    private var mediaPlayer: MediaPlayer? = null
+    private var musicState: MusicState = MusicState.RELEASE
+    private var job: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
@@ -55,8 +68,55 @@ class MainActivity : AppCompatActivity() {
             }
             getResultFromSongActivity.launch(intent)
         }
+        ivMusicPlay.setOnClickListener {
+            when(musicState) {
+                MusicState.RELEASE -> {
+                    try {
+                        mediaPlayer = MediaPlayer.create(this@MainActivity, R.raw.sample).apply {
+                            setOnCompletionListener {
+                                mediaPlayer?.release()
+                                mediaPlayer = null
+                                job?.cancel()
+                                musicState = MusicState.RELEASE
+                                seekbarMainMusic.progress = 0
+                                ivMusicPlay.setImageDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_play_filled))
+                            }
+                        }
+                        mediaPlayer?.start()
+                        job = lifecycleScope.launch {
+                            while (isActive) {
+                                seekbarMainMusic.progress = mediaPlayer?.currentPosition ?: 0
+                                delay(100L)
+                            }
+                        }
+                        musicState = MusicState.PLAYING
+                        seekbarMainMusic.max = mediaPlayer?.duration ?: 0
+                        ivMusicPlay.setImageDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_pause))
+                    } catch (e: IOException) {
+                        Toast.makeText(this@MainActivity, e.message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+                MusicState.PLAYING -> {
+                    mediaPlayer?.pause()
+                    job?.cancel()
+                    musicState = MusicState.PAUSE
+                    ivMusicPlay.setImageDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_play_filled))
+                }
+                MusicState.PAUSE -> {
+                    mediaPlayer?.start()
+                    job = lifecycleScope.launch {
+                        while (isActive) {
+                            seekbarMainMusic.progress = mediaPlayer?.currentPosition ?: 0
+                            delay(100L)
+                        }
+                    }
+                    musicState = MusicState.PLAYING
+                    ivMusicPlay.setImageDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_pause))
+                }
+            }
+        }
     }
-    
+
     companion object {
         const val INTENT_KEY = "key"
         const val TITLE = "title"

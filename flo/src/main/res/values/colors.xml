@@ -17,4 +17,5 @@
     <color name="ic_state_activate">#000000</color>
     <color name="switch_track_color">#ADADAD</color>
     <color name="switch_thumb_color">#FFFFFFFF</color>
+    <color name="seekbar_progress_color">#03A9F4</color>
 </resources>

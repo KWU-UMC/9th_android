@@ -122,12 +122,12 @@
         app:layout_constraintStart_toEndOf="@id/ivMusicHeart"/>
 
     <SeekBar
-        android:id="@+id/seekbarMusic"
+        android:id="@+id/seekbarDetailMusic"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:thumb="@drawable/custom_seekbar_thumb"
-        android:progressTint="#ABABAB"
+        android:progressTint="@color/seekbar_progress_color"
         android:thumbOffset="0dp"
         android:paddingStart="0dp"
         android:paddingEnd="0dp"
@@ -140,8 +140,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        app:layout_constraintStart_toStartOf="@id/seekbarMusic"
-        app:layout_constraintTop_toBottomOf="@id/seekbarMusic"
+        app:layout_constraintStart_toStartOf="@id/seekbarDetailMusic"
+        app:layout_constraintTop_toBottomOf="@id/seekbarDetailMusic"
         android:text="00:00"/>
 
     <TextView
@@ -149,9 +149,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="@id/seekbarMusic"
-        app:layout_constraintTop_toBottomOf="@id/seekbarMusic"
-        android:text="03:27"/>
+        app:layout_constraintEnd_toEndOf="@id/seekbarDetailMusic"
+        app:layout_constraintTop_toBottomOf="@id/seekbarDetailMusic"
+        tools:text="03:27"/>
 
 
     <ImageView
