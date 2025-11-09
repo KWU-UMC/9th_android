@@ -21,6 +21,7 @@ class SongDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySongDetailBinding
     private var job: Job? = null
+    private var currentPlayTime: Long = -100L // 단위: ms (기본값이 -100L인 이유 → 음악 재생 시작하자마자 100ms 더하기 때문)
 
     private var mediaPlayer: MediaPlayer? = null
     private var musicState: MusicState = MusicState.RELEASE
@@ -50,10 +51,6 @@ class SongDetailActivity : AppCompatActivity() {
     }
 
     private fun initViews() = with(binding) {
-        val musicTitle = intent.getStringExtra(MainActivity.TITLE)
-        val musicSinger = intent.getStringExtra(MainActivity.SINGER)
-        ivDetailMusicTitle.text = musicTitle
-        ivDetailMusicSinger.text = musicSinger
         ivDetailMusicTitle.text = intent.getStringExtra(MainActivity.TITLE)
         ivDetailMusicSinger.text = intent.getStringExtra(MainActivity.SINGER)
         mediaPlayer = MediaPlayer.create(this@SongDetailActivity, R.raw.sample).apply {
@@ -61,11 +58,15 @@ class SongDetailActivity : AppCompatActivity() {
                 mediaPlayer?.release()
                 mediaPlayer = null
                 job?.cancel()
+                currentPlayTime = 0
+                tvSongTimeStart.text = getFormattedTime(currentPlayTime.toInt())
                 musicState = MusicState.RELEASE
                 ivMusicPlay.setImageDrawable(ContextCompat.getDrawable(this@SongDetailActivity, R.drawable.ic_play_filled))
                 seekbarMusic.progress = 0
             }
         }
+        seekbarMusic.max = mediaPlayer?.duration ?: 0
+        tvSongTimeEnd.text = getFormattedTime(mediaPlayer?.duration ?: 0)
     }
 
     private fun initListeners() = with(binding) {
@@ -83,6 +84,8 @@ class SongDetailActivity : AppCompatActivity() {
                         mediaPlayer?.start()
                         job = lifecycleScope.launch {
                             while (isActive) {
+                                currentPlayTime += 100L
+                                tvSongTimeStart.text = getFormattedTime(currentPlayTime.toInt())
                                 seekbarMusic.progress = mediaPlayer?.currentPosition ?: 0
                                 delay(100L)
                             }
@@ -103,6 +106,8 @@ class SongDetailActivity : AppCompatActivity() {
                     mediaPlayer?.start()
                     job = lifecycleScope.launch {
                         while (isActive) {
+                            currentPlayTime += 100L
+                            tvSongTimeStart.text = getFormattedTime(currentPlayTime.toInt())
                             seekbarMusic.progress = mediaPlayer?.currentPosition ?: 0
                             delay(100L)
                         }
@@ -148,5 +153,12 @@ class SongDetailActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun getFormattedTime(milliseconds: Int): String {
+        val totalSecond = milliseconds/1000
+        val minutes = totalSecond/60
+        val seconds = totalSecond%60
+        return String.format("%02d:%02d", minutes, seconds)
     }
 }
