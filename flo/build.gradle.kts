@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.flo"
-        minSdk = 24
+        minSdk = 31
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -60,4 +60,6 @@ dependencies {
     // JSON serialization library, works with the Kotlin serialization plugin
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.dotsindicator)
+    implementation(libs.circleindicator)
+    implementation(libs.androidx.core.splashscreen)
 }

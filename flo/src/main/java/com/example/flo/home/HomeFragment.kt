@@ -4,15 +4,21 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.flo.TrackModel
 import com.example.flo.R
+import com.example.flo.TrackModel
 import com.example.flo.databinding.FragmentHomeBinding
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private lateinit var binding: FragmentHomeBinding
+    private var job: Job? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -24,7 +30,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun initViews() = with(binding) {
         viewPager2MusicBanner.adapter = HomeBannerAdapter(this@HomeFragment)
-        dotsIndicator.attachTo(viewPager2MusicBanner)
+        circleIndicator.setViewPager(viewPager2MusicBanner)
+        val totalPageCount = viewPager2MusicBanner.adapter?.itemCount ?: 0 // 3
+        var currentPage = viewPager2MusicBanner.currentItem // 0
+        job = lifecycleScope.launch {
+            while (isActive) {
+                delay(1500)
+                val nextPage = (currentPage + 1) % totalPageCount
+                viewPager2MusicBanner.setCurrentItem(nextPage, true)
+                circleIndicator.animatePageSelected(nextPage)
+                currentPage = nextPage
+            }
+        }
+
         val testTrackList = mutableListOf(
             TrackModel(
                 trackTitle = "Starry Night",

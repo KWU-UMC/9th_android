@@ -15,17 +15,14 @@
         app:layout_constraintTop_toTopOf="parent">
     </androidx.viewpager2.widget.ViewPager2>
 
-    <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
-        android:id="@+id/dotsIndicator"
+    <me.relex.circleindicator.CircleIndicator3
+        android:id="@+id/circleIndicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        app:dotsColor="#B6B6B6"
-        app:dotsSize="8dp"
-        app:dotsSpacing="6dp"
+        android:layout_marginBottom="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/viewPager2MusicBanner"
+        app:layout_constraintBottom_toBottomOf="@id/viewPager2MusicBanner"
         app:selectedDotColor="@color/secondary_color" />
 
     <TextView
@@ -39,7 +36,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dotsIndicator" />
+        app:layout_constraintTop_toBottomOf="@id/viewPager2MusicBanner" />
 
     <ImageView
         android:layout_width="24dp"

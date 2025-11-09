@@ -1,5 +1,6 @@
 [versions]
 agp = "8.9.1"
+circleindicator = "2.1.6"
 coreSplashscreen = "1.2.0"
 dotsindicator = "5.0"
 kotlin = "2.0.21"
@@ -20,6 +21,7 @@ androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", versi
 androidx-navigation-fragment = { module = "androidx.navigation:navigation-fragment", version.ref = "navigationFragment" }
 androidx-navigation-safe-args-gradle-plugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "navigationFragment" }
 androidx-navigation-ui = { module = "androidx.navigation:navigation-ui", version.ref = "navigationFragment" }
+circleindicator = { module = "me.relex:circleindicator", version.ref = "circleindicator" }
 dotsindicator = { module = "com.tbuonomo:dotsindicator", version.ref = "dotsindicator" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
