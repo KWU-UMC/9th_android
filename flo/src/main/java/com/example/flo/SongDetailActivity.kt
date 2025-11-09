@@ -9,17 +9,25 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.example.flo.databinding.ActivitySongDetailBinding
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
 import java.io.IOException
 
 class SongDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySongDetailBinding
-    private var isShuffleOn: Boolean = false
-    private var repeatState: MusicRepeatState = MusicRepeatState.NONE
+    private var job: Job? = null
 
     private var mediaPlayer: MediaPlayer? = null
     private var musicState: MusicState = MusicState.RELEASE
+
+    private var isShuffleOn: Boolean = false
+    private var repeatState: MusicRepeatState = MusicRepeatState.NONE
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +54,18 @@ class SongDetailActivity : AppCompatActivity() {
         val musicSinger = intent.getStringExtra(MainActivity.SINGER)
         ivDetailMusicTitle.text = musicTitle
         ivDetailMusicSinger.text = musicSinger
+        ivDetailMusicTitle.text = intent.getStringExtra(MainActivity.TITLE)
+        ivDetailMusicSinger.text = intent.getStringExtra(MainActivity.SINGER)
+        mediaPlayer = MediaPlayer.create(this@SongDetailActivity, R.raw.sample).apply {
+            setOnCompletionListener {
+                mediaPlayer?.release()
+                mediaPlayer = null
+                job?.cancel()
+                musicState = MusicState.RELEASE
+                ivMusicPlay.setImageDrawable(ContextCompat.getDrawable(this@SongDetailActivity, R.drawable.ic_play_filled))
+                seekbarMusic.progress = 0
+            }
+        }
     }
 
     private fun initListeners() = with(binding) {
@@ -59,16 +79,14 @@ class SongDetailActivity : AppCompatActivity() {
         ivMusicPlay.setOnClickListener {
             when(musicState) {
                 MusicState.RELEASE -> {
-                    mediaPlayer = MediaPlayer.create(this@SongDetailActivity, R.raw.sample).apply {
-                        setOnCompletionListener {
-                            mediaPlayer?.release()
-                            mediaPlayer = null
-                            musicState = MusicState.RELEASE
-                            ivMusicPlay.setImageDrawable(ContextCompat.getDrawable(this@SongDetailActivity, R.drawable.ic_play_filled))
-                        }
-                    }
                     try {
                         mediaPlayer?.start()
+                        job = lifecycleScope.launch {
+                            while (isActive) {
+                                seekbarMusic.progress = mediaPlayer?.currentPosition ?: 0
+                                delay(100L)
+                            }
+                        }
                         musicState = MusicState.PLAYING
                         ivMusicPlay.setImageDrawable(ContextCompat.getDrawable(this@SongDetailActivity, R.drawable.ic_pause))
                     } catch (e: IOException) {
@@ -77,11 +95,18 @@ class SongDetailActivity : AppCompatActivity() {
                 }
                 MusicState.PLAYING -> {
                     mediaPlayer?.pause()
+                    job?.cancel()
                     musicState = MusicState.PAUSE
                     ivMusicPlay.setImageDrawable(ContextCompat.getDrawable(this@SongDetailActivity, R.drawable.ic_play_filled))
                 }
                 MusicState.PAUSE -> {
                     mediaPlayer?.start()
+                    job = lifecycleScope.launch {
+                        while (isActive) {
+                            seekbarMusic.progress = mediaPlayer?.currentPosition ?: 0
+                            delay(100L)
+                        }
+                    }
                     musicState = MusicState.PLAYING
                     ivMusicPlay.setImageDrawable(ContextCompat.getDrawable(this@SongDetailActivity, R.drawable.ic_pause))
                 }
