@@ -1,6 +1,7 @@
 package com.example.flo
 
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -9,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.flo.databinding.ActivitySongDetailBinding
+import java.io.IOException
 
 class SongDetailActivity : AppCompatActivity() {
 
@@ -16,14 +18,15 @@ class SongDetailActivity : AppCompatActivity() {
     private var isShuffleOn: Boolean = false
     private var repeatState: MusicRepeatState = MusicRepeatState.NONE
 
+    private var mediaPlayer: MediaPlayer? = null
+    private var musicState: MusicState = MusicState.RELEASE
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding = ActivitySongDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         val extraPadding = resources.getDimensionPixelSize(R.dimen.activity_default_padding)
-
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(
@@ -52,6 +55,37 @@ class SongDetailActivity : AppCompatActivity() {
             }
             setResult(RESULT_OK, intent)
             finish()
+        }
+        ivMusicPlay.setOnClickListener {
+            when(musicState) {
+                MusicState.RELEASE -> {
+                    mediaPlayer = MediaPlayer.create(this@SongDetailActivity, R.raw.sample).apply {
+                        setOnCompletionListener {
+                            mediaPlayer?.release()
+                            mediaPlayer = null
+                            musicState = MusicState.RELEASE
+                            ivMusicPlay.setImageDrawable(ContextCompat.getDrawable(this@SongDetailActivity, R.drawable.ic_play_filled))
+                        }
+                    }
+                    try {
+                        mediaPlayer?.start()
+                        musicState = MusicState.PLAYING
+                        ivMusicPlay.setImageDrawable(ContextCompat.getDrawable(this@SongDetailActivity, R.drawable.ic_pause))
+                    } catch (e: IOException) {
+                        Toast.makeText(this@SongDetailActivity, e.message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+                MusicState.PLAYING -> {
+                    mediaPlayer?.pause()
+                    musicState = MusicState.PAUSE
+                    ivMusicPlay.setImageDrawable(ContextCompat.getDrawable(this@SongDetailActivity, R.drawable.ic_play_filled))
+                }
+                MusicState.PAUSE -> {
+                    mediaPlayer?.start()
+                    musicState = MusicState.PLAYING
+                    ivMusicPlay.setImageDrawable(ContextCompat.getDrawable(this@SongDetailActivity, R.drawable.ic_pause))
+                }
+            }
         }
         ivMusicShuffle.setOnClickListener {
             isShuffleOn = !isShuffleOn

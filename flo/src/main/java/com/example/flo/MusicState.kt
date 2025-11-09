@@ -3,5 +3,5 @@ package com.example.flo
 enum class MusicState {
     PLAYING,
     PAUSE,
-    STOP
+    RELEASE
 }

@@ -180,7 +180,7 @@
         android:id="@+id/ivMusicPlay"
         android:layout_width="36dp"
         android:layout_height="36dp"
-        android:src="@drawable/ic_play"
+        android:src="@drawable/ic_play_filled"
         app:layout_constraintStart_toEndOf="@id/ivMusicPlayPrevious"
         app:layout_constraintTop_toTopOf="@id/ivMusicPlayPrevious"
         app:layout_constraintBottom_toBottomOf="@id/ivMusicPlayPrevious"
