@@ -72,7 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/img_album_today_released_1" />
+            android:src="@drawable/img_we_don_t_talk_anymore" />
     </com.google.android.material.card.MaterialCardView>
 
     <TextView

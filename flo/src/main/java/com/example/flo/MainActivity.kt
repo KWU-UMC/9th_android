@@ -3,6 +3,7 @@ package com.example.flo
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
@@ -36,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         installSplashScreen()
         Thread.sleep(3000)
         super.onCreate(savedInstanceState)
+        Log.e("ACTIVITY A", "onCreate")
         enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -60,11 +62,48 @@ class MainActivity : AppCompatActivity() {
         initListeners()
     }
 
+    override fun onStart() {
+        super.onStart()
+        Log.e("ACTIVITY A", "onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.e("ACTIVITY A", "onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.e("ACTIVITY A", "onPause")
+        mediaPlayer?.pause()
+        job?.cancel()
+        musicState = MusicState.PAUSE
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.e("ACTIVITY A", "onStop")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.e("ACTIVITY A", "onRestart")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.e("ACTIVITY A", "onDestroy")
+        mediaPlayer?.release()
+        mediaPlayer = null
+    }
+
     private fun initListeners() = with(binding) {
-        musicPlayerContainer.setOnClickListener {
+        ivMusicPlayList.setOnClickListener {
             val intent = Intent(this@MainActivity, SongDetailActivity::class.java).apply {
                 putExtra(TITLE, tvTrackTitle.text.toString())
                 putExtra(SINGER, tvTrackArtist.text.toString())
+                putExtra(CURRENT_MUSIC_POSITION, mediaPlayer?.currentPosition)
+                putExtra(CURRENT_PLAY_STATE, musicState.name)
             }
             getResultFromSongActivity.launch(intent)
         }
@@ -118,8 +157,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val INTENT_KEY = "key"
-        const val TITLE = "title"
-        const val SINGER = "singer"
+        const val INTENT_KEY = "KEY"
+        const val TITLE = "TITLE"
+        const val SINGER = "SINGER"
+        const val CURRENT_MUSIC_POSITION = "CURRENT_MUSIC_POSITION"
+        const val CURRENT_PLAY_STATE = "CURRENT_PLAY_STATE"
     }
 }

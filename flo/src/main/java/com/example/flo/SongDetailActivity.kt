@@ -3,6 +3,7 @@ package com.example.flo
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -29,9 +30,13 @@ class SongDetailActivity : AppCompatActivity() {
     private var isShuffleOn: Boolean = false
     private var repeatState: MusicRepeatState = MusicRepeatState.NONE
 
+    private val currentMusicPosition by lazy {
+        intent.getIntExtra(MainActivity.CURRENT_MUSIC_POSITION, 0)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.e("ACTIVITY B", "onCreate")
         enableEdgeToEdge()
         binding = ActivitySongDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -50,9 +55,37 @@ class SongDetailActivity : AppCompatActivity() {
         initListeners()
     }
 
+    override fun onStart() {
+        super.onStart()
+        Log.e("ACTIVITY B", "onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.e("ACTIVITY B", "onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.e("ACTIVITY B", "onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.e("ACTIVITY B", "onStop")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.e("ACTIVITY B", "onRestart")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.e("ACTIVITY B", "onDestroy")
+    }
+
     private fun initViews() = with(binding) {
-        ivDetailMusicTitle.text = intent.getStringExtra(MainActivity.TITLE)
-        ivDetailMusicSinger.text = intent.getStringExtra(MainActivity.SINGER)
         mediaPlayer = MediaPlayer.create(this@SongDetailActivity, R.raw.sample).apply {
             setOnCompletionListener {
                 mediaPlayer?.release()
@@ -64,7 +97,40 @@ class SongDetailActivity : AppCompatActivity() {
                 ivMusicPlay.setImageDrawable(ContextCompat.getDrawable(this@SongDetailActivity, R.drawable.ic_play_filled))
                 seekbarDetailMusic.progress = 0
             }
+        } // 미리 준비
+
+        ivDetailMusicTitle.text = intent.getStringExtra(MainActivity.TITLE)
+        ivDetailMusicSinger.text = intent.getStringExtra(MainActivity.SINGER)
+        val state = intent.getStringExtra(MainActivity.CURRENT_PLAY_STATE)
+        musicState = state?.let { MusicState.valueOf(it) } ?: MusicState.RELEASE
+        when(musicState) {
+            MusicState.RELEASE -> {
+                ivMusicPlay.setImageDrawable(ContextCompat.getDrawable(this@SongDetailActivity, R.drawable.ic_play_filled))
+                seekbarDetailMusic.progress = 0
+            }
+            MusicState.PLAYING -> {
+                ivMusicPlay.setImageDrawable(ContextCompat.getDrawable(this@SongDetailActivity, R.drawable.ic_pause))
+                seekbarDetailMusic.progress = currentMusicPosition
+                mediaPlayer?.seekTo(currentMusicPosition)
+                mediaPlayer?.start()
+                currentPlayTime = currentMusicPosition.toLong() - 100L
+                job = lifecycleScope.launch {
+                    while (isActive) {
+                        currentPlayTime += 100L
+                        tvSongTimeStart.text = getFormattedTime(currentPlayTime.toInt())
+                        seekbarDetailMusic.progress = mediaPlayer?.currentPosition ?: 0
+                        delay(100L)
+                    }
+                }
+            }
+            MusicState.PAUSE -> {
+                ivMusicPlay.setImageDrawable(ContextCompat.getDrawable(this@SongDetailActivity, R.drawable.ic_play_filled))
+                seekbarDetailMusic.progress = intent.getIntExtra(MainActivity.CURRENT_MUSIC_POSITION, 0)
+                mediaPlayer?.seekTo(currentMusicPosition)
+                currentPlayTime = currentMusicPosition.toLong() - 100L
+            }
         }
+
         seekbarDetailMusic.max = mediaPlayer?.duration ?: 0
         tvSongTimeEnd.text = getFormattedTime(mediaPlayer?.duration ?: 0)
     }
