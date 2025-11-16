@@ -1,4 +1,4 @@
-package com.example.flo.album
+package com.example.flo.mission.presentation.album
 
 import android.os.Bundle
 import android.view.View
@@ -6,7 +6,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.example.flo.R
-import com.example.flo.TrackModel
+import com.example.flo.mission.model.TrackModel
 import com.example.flo.databinding.FragmentAlbumBinding
 import com.google.android.material.tabs.TabLayoutMediator
 

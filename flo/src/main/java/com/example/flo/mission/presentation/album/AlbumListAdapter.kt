@@ -1,10 +1,10 @@
-package com.example.flo.album
+package com.example.flo.mission.presentation.album
 
 import android.text.Layout
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.flo.TrackModel
+import com.example.flo.mission.model.TrackModel
 import com.example.flo.databinding.ItemAlbumListBinding
 import java.util.Locale
 

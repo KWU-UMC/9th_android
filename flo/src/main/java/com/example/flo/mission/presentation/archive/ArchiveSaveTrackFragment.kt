@@ -1,11 +1,11 @@
-package com.example.flo.archive
+package com.example.flo.mission.presentation.archive
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.flo.R
-import com.example.flo.TrackModel
+import com.example.flo.mission.model.TrackModel
 import com.example.flo.databinding.FragmentArchiveSaveTrackBinding
 
 class ArchiveSaveTrackFragment : Fragment(R.layout.fragment_archive_save_track) {

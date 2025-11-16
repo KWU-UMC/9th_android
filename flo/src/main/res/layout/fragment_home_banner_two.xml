@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/img_home_banner_two_music_background"
     android:padding="16dp"
-    tools:context=".HomeBannerTwoFragment">
+    tools:context=".home.HomeBannerTwoFragment">
 
     <ImageView
         android:id="@+id/ivBannerThreeMusicSetting"

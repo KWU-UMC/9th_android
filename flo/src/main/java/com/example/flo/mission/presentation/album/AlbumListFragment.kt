@@ -1,4 +1,4 @@
-package com.example.flo.album
+package com.example.flo.mission.presentation.album
 
 import android.os.Bundle
 import android.view.View
@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.flo.R
-import com.example.flo.TrackModel
+import com.example.flo.mission.model.TrackModel
 import com.example.flo.databinding.FragmentAlbumListBinding
 
 class AlbumListFragment : Fragment(R.layout.fragment_album_list) {

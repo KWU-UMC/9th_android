@@ -1,4 +1,4 @@
-package com.example.flo
+package com.example.flo.mission.model
 
 enum class MusicRepeatState {
     NONE,

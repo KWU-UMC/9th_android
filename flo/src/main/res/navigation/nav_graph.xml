@@ -17,7 +17,7 @@
         tools:layout="@layout/fragment_album">
         <argument
             android:name="track"
-            app:argType="com.example.flo.TrackModel"
+            app:argType="com.example.flo.mission.model.TrackModel"
             app:nullable="true"/>
     </fragment>
     <fragment
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.example.flo.SearchFragment"
+        android:name="com.example.flo.mission.presentation.search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
 </navigation>

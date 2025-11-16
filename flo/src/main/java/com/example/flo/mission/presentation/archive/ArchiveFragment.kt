@@ -1,4 +1,4 @@
-package com.example.flo.archive
+package com.example.flo.mission.presentation.archive
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

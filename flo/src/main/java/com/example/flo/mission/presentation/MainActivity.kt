@@ -1,4 +1,4 @@
-package com.example.flo
+package com.example.flo.mission.presentation
 
 import android.content.Intent
 import android.media.MediaPlayer
@@ -16,7 +16,8 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.example.flo.SongDetailActivity
+import com.example.flo.mission.model.MusicState
+import com.example.flo.R
 import com.example.flo.databinding.ActivityMainBinding
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay

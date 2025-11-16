@@ -1,4 +1,4 @@
-package com.example.flo.album
+package com.example.flo.mission.presentation.album
 
 import android.os.Bundle
 import android.view.View

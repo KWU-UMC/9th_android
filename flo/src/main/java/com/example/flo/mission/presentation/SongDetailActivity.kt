@@ -1,4 +1,4 @@
-package com.example.flo
+package com.example.flo.mission.presentation
 
 import android.content.Intent
 import android.media.MediaPlayer
@@ -11,6 +11,9 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import com.example.flo.mission.model.MusicRepeatState
+import com.example.flo.mission.model.MusicState
+import com.example.flo.R
 import com.example.flo.databinding.ActivitySongDetailBinding
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -31,7 +34,7 @@ class SongDetailActivity : AppCompatActivity() {
     private var repeatState: MusicRepeatState = MusicRepeatState.NONE
 
     private val currentMusicPosition by lazy {
-        intent.getIntExtra(MainActivity.CURRENT_MUSIC_POSITION, 0)
+        intent.getIntExtra(MainActivity.Companion.CURRENT_MUSIC_POSITION, 0)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -99,9 +102,9 @@ class SongDetailActivity : AppCompatActivity() {
             }
         } // 미리 준비
 
-        ivDetailMusicTitle.text = intent.getStringExtra(MainActivity.TITLE)
-        ivDetailMusicSinger.text = intent.getStringExtra(MainActivity.SINGER)
-        val state = intent.getStringExtra(MainActivity.CURRENT_PLAY_STATE)
+        ivDetailMusicTitle.text = intent.getStringExtra(MainActivity.Companion.TITLE)
+        ivDetailMusicSinger.text = intent.getStringExtra(MainActivity.Companion.SINGER)
+        val state = intent.getStringExtra(MainActivity.Companion.CURRENT_PLAY_STATE)
         musicState = state?.let { MusicState.valueOf(it) } ?: MusicState.RELEASE
         when(musicState) {
             MusicState.RELEASE -> {
@@ -125,7 +128,7 @@ class SongDetailActivity : AppCompatActivity() {
             }
             MusicState.PAUSE -> {
                 ivMusicPlay.setImageDrawable(ContextCompat.getDrawable(this@SongDetailActivity, R.drawable.ic_play_filled))
-                seekbarDetailMusic.progress = intent.getIntExtra(MainActivity.CURRENT_MUSIC_POSITION, 0)
+                seekbarDetailMusic.progress = intent.getIntExtra(MainActivity.Companion.CURRENT_MUSIC_POSITION, 0)
                 mediaPlayer?.seekTo(currentMusicPosition)
                 currentPlayTime = currentMusicPosition.toLong() - 100L
             }
@@ -138,7 +141,7 @@ class SongDetailActivity : AppCompatActivity() {
     private fun initListeners() = with(binding) {
         ivDetailMusicCollapse.setOnClickListener {
             val intent = Intent(this@SongDetailActivity, MainActivity::class.java).apply {
-                putExtra(MainActivity.INTENT_KEY, ivDetailMusicTitle.text.toString())
+                putExtra(MainActivity.Companion.INTENT_KEY, ivDetailMusicTitle.text.toString())
             }
             setResult(RESULT_OK, intent)
             finish()

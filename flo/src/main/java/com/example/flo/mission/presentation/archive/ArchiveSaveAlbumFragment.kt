@@ -1,4 +1,4 @@
-package com.example.flo.archive
+package com.example.flo.mission.presentation.archive
 
 import android.os.Bundle
 import android.view.View
@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.flo.R
 import com.example.flo.databinding.FragmentArchiveSaveAlbumBinding
+import com.example.flo.mission.model.AlbumModel
 
 class ArchiveSaveAlbumFragment : Fragment(R.layout.fragment_archive_save_album) {
 

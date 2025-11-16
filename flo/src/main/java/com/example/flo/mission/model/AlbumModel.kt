@@ -1,6 +1,4 @@
-package com.example.flo.archive
-
-import com.example.flo.MusicState
+package com.example.flo.mission.model
 
 data class AlbumModel(
     val albumId: Int,

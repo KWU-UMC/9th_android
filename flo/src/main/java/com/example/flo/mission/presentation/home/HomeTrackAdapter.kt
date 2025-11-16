@@ -1,11 +1,11 @@
-package com.example.flo.home
+package com.example.flo.mission.presentation.home
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.example.flo.TrackModel
+import com.example.flo.mission.model.TrackModel
 import com.example.flo.databinding.ItemHomeTodayReleasedAlbumBinding
 import com.example.flo.R
 

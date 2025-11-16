@@ -1,10 +1,11 @@
-package com.example.flo
+package com.example.flo.mission.presentation.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.example.flo.R
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -12,11 +13,11 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 /**
- * A simple [Fragment] subclass.
- * Use the [HomeBannerOneFragment.newInstance] factory method to
+ * A simple [androidx.fragment.app.Fragment] subclass.
+ * Use the [HomeBannerThreeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class HomeBannerOneFragment : Fragment() {
+class HomeBannerThreeFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -34,7 +35,7 @@ class HomeBannerOneFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home_banner_one, container, false)
+        return inflater.inflate(R.layout.fragment_home_banner_three, container, false)
     }
 
     companion object {
@@ -44,12 +45,12 @@ class HomeBannerOneFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeBannerOneFragment.
+         * @return A new instance of fragment HomeBannerThreeFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            HomeBannerOneFragment().apply {
+            HomeBannerThreeFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

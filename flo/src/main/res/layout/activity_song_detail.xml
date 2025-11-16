@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:padding="16dp"
-    tools:context=".SongDetailActivity">
+    tools:context=".mission.presentation.SongDetailActivity">
 
     <ImageView
         android:id="@+id/ivMusicFilter"

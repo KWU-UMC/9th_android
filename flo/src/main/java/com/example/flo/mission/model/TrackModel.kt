@@ -1,4 +1,4 @@
-package com.example.flo
+package com.example.flo.mission.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
