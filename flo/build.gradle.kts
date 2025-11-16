@@ -5,6 +5,7 @@ plugins {
     kotlin("plugin.serialization") version "2.0.21"
     id("androidx.navigation.safeargs")
     id("kotlin-parcelize")
+    id("kotlin-kapt")
 }
 
 android {
@@ -62,4 +63,7 @@ dependencies {
     implementation(libs.dotsindicator)
     implementation(libs.circleindicator)
     implementation(libs.androidx.core.splashscreen)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    kapt(libs.androidx.room.compiler)
 }
