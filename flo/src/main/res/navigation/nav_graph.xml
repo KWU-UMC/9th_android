@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/archiveFragment"
-        android:name="com.example.flo.archive.ArchiveFragment"
+        android:name="com.example.flo.mission.presentation.archive.ArchiveFragment"
         android:label="fragment_archive"
         tools:layout="@layout/fragment_archive" />
     <fragment
         android:id="@+id/albumFragment"
-        android:name="com.example.flo.album.AlbumFragment"
+        android:name="com.example.flo.mission.presentation.album.AlbumFragment"
         android:label="fragment_album"
         tools:layout="@layout/fragment_album">
         <argument
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.flo.home.HomeFragment"
+        android:name="com.example.flo.mission.presentation.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
