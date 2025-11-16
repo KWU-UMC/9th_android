@@ -10,5 +10,5 @@ data class AlbumModel(
     val albumReleaseDate: String,
     val albumFormat: String,
     val albumGenre: String,
-    val albumState: MusicState = MusicState.STOP
+    val albumState: MusicState = MusicState.RELEASE
 )

@@ -55,7 +55,7 @@
         android:id="@+id/ivArchiveSaveTrackPlay"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:src="@drawable/ic_play"
+        android:src="@drawable/ic_play_filled"
         android:layout_marginEnd="12dp"
         app:layout_constraintEnd_toStartOf="@id/ivArchiveSaveTrackOption"
         app:layout_constraintTop_toTopOf="@id/ivArchiveSaveTrackOption"

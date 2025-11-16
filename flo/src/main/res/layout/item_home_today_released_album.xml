@@ -19,7 +19,7 @@
         android:id="@+id/ivTodayReleasedTrackPlay"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:src="@drawable/ic_play"
+        android:src="@drawable/ic_play_filled"
         android:layout_margin="12dp"
         app:layout_constraintBottom_toBottomOf="@id/ivTodayReleasedTrack"
         app:layout_constraintEnd_toEndOf="@id/ivTodayReleasedTrack"

@@ -28,7 +28,7 @@ class ArchiveSaveAlbumAdapter(
                 when(item.albumState) {
                     MusicState.PLAYING -> ContextCompat.getDrawable(context, R.drawable.ic_pause)
                     MusicState.PAUSE -> ContextCompat.getDrawable(context, R.drawable.ic_play_filled)
-                    MusicState.STOP -> ContextCompat.getDrawable(context, R.drawable.ic_play_filled)
+                    MusicState.RELEASE -> ContextCompat.getDrawable(context, R.drawable.ic_play_filled)
                 }
             )
             ivArchiveSaveAlbumPlay.setOnClickListener {
@@ -45,7 +45,7 @@ class ArchiveSaveAlbumAdapter(
                         mutableItems[bindingAdapterPosition] = newItem
                         notifyItemChanged(bindingAdapterPosition)
                     }
-                    MusicState.STOP -> {
+                    MusicState.RELEASE -> {
                         ivArchiveSaveAlbumPlay.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_pause))
                         val newItem = item.copy(albumState = MusicState.PLAYING)
                         mutableItems[bindingAdapterPosition] = newItem

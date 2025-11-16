@@ -9,6 +9,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UMCAndroidWorkBook">
         <activity
+            android:name=".study.PracticeActivity"
+            android:exported="true">
+        </activity>
+        <activity
             android:name=".SongDetailActivity"
             android:exported="false" />
         <activity
