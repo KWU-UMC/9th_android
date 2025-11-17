@@ -9,9 +9,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UMCAndroidWorkBook">
         <activity
+            android:name=".mission.presentation.auth.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".mission.presentation.auth.SignUpActivity"
+            android:exported="false" />
+        <activity
             android:name=".study.PracticeActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".mission.presentation.SongDetailActivity"
             android:exported="false" />
