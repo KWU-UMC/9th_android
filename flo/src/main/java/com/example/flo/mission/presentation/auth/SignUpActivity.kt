@@ -14,6 +14,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import android.util.Log
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -40,12 +41,22 @@ class SignUpActivity : AppCompatActivity() {
             } else {
                 val database = UserDatabase.getInstance(context = this@SignUpActivity)
                 val userDao = database.userDao
+
                 // 메인 스레드가 아닌 UI 스레드에서 DB 작업 실행
                 CoroutineScope(Dispatchers.IO).launch {
-                    userDao.insertUser(user = UserEntity(email = etSignUpEmail.text.toString(), password = etSignUpPassword.text.toString()))
-                    withContext(Dispatchers.Main) {
-                        Toast.makeText(this@SignUpActivity, "회원가입이 완료되었습니다.", Toast.LENGTH_SHORT).show()
-                        finish()
+                    val email = etSignUpEmail.text.trim().toString()
+                    val password = etSignUpPassword.text.trim().toString()
+                    val user: UserEntity? = userDao.getUserByEmail(email = email)
+                    if(user == null) {
+                        userDao.insertUser(user = UserEntity(email = email, password = password))
+                        withContext(Dispatchers.Main) {
+                            Toast.makeText(this@SignUpActivity, "회원가입이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                            finish()
+                        }
+                    } else {
+                        withContext(Dispatchers.Main) {
+                            Toast.makeText(this@SignUpActivity, "중복된 아이디가 이미 존재합니다.", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
             }
