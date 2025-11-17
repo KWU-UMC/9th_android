@@ -1,10 +1,12 @@
 package com.example.flo.mission.presentation.archive
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import com.example.flo.R
 import com.example.flo.databinding.FragmentArchiveBinding
+import com.example.flo.mission.presentation.auth.LoginActivity
 import com.google.android.material.tabs.TabLayoutMediator
 
 class ArchiveFragment : Fragment(R.layout.fragment_archive) {
@@ -34,7 +36,10 @@ class ArchiveFragment : Fragment(R.layout.fragment_archive) {
     }
 
     private fun initListeners() = with(binding) {
-
+        tvArchiveLogin.setOnClickListener {
+            val intent = Intent(context, LoginActivity::class.java)
+            startActivity(intent)
+        }
     }
 
 }

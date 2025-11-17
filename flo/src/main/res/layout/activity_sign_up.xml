@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
+    tools:padding="16dp"
     tools:context=".mission.presentation.auth.SignUpActivity">
 
     <TextView
@@ -19,6 +19,7 @@
         android:layout_gravity="center_horizontal"/>
 
     <EditText
+        android:id="@+id/etSignUpEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="아이디(이메일)"
@@ -27,6 +28,7 @@
         android:layout_marginTop="32dp"/>
 
     <EditText
+        android:id="@+id/etSignUpPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="비밀번호"
@@ -35,6 +37,7 @@
         android:layout_marginTop="12dp"/>
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSignUp"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:backgroundTint="@color/primary"
