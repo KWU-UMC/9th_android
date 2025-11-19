@@ -10,6 +10,6 @@ data class AlbumEntity(
     val title: String = "",
     val artist: String = "",
     val thumbnail: Int? = null,
-    val tracks: List<SongEntity>,
+    val songs: List<SongEntity>? = null,
     val isLike: Boolean = false,
 )

@@ -16,8 +16,8 @@ import com.example.flo.mission.database.entity.SongEntity
 @TypeConverters(SongConverter::class)
 abstract class MusicDatabase: RoomDatabase() {
 
-    abstract fun songDao(): SongDao
-    abstract fun albumDao(): AlbumDao
+    abstract val songDao: SongDao
+    abstract val albumDao: AlbumDao
 
     companion object {
         @Volatile
