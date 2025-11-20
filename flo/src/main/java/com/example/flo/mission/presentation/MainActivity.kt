@@ -16,9 +16,11 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.example.flo.mission.model.MusicState
 import com.example.flo.R
 import com.example.flo.databinding.ActivityMainBinding
+import com.example.flo.mission.database.database.MusicDatabase
+import com.example.flo.mission.database.pref.MusicPreference
+import com.example.flo.mission.model.MusicState
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
@@ -48,9 +50,19 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0)
             insets
         }
+
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.mainFragmentContainerView) as NavHostFragment
         val navController = navHostFragment.navController
         binding.bottomNavigationView.setupWithNavController(navController)
+
+        val musicDatabase = MusicDatabase.getInstance(context = this)
+        val musicPreference = MusicPreference(context = this)
+        val songIds = musicPreference.getSongId()
+        if(songIds.isEmpty()) {
+            musicPreference.saveSongId(songDao = musicDatabase.songDao)
+        } else {
+            // 다음 미션
+        }
 
         // main activity ↔ song activity
         getResultFromSongActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
