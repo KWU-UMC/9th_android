@@ -17,6 +17,9 @@ interface SongDao {
     @Query("SELECT * FROM SongTable")
     fun getAllSongs(): List<SongEntity>
 
+    @Query("SELECT * FROM SongTable WHERE id = :id")
+    fun getSongById(id: Int): SongEntity
+
     @Query("SELECT * FROM SongTable WHERE artist = :artist")
     fun getSongsByArtist(artist: String): List<SongEntity>
 }

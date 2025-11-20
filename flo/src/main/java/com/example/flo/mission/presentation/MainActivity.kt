@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -19,12 +20,16 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.flo.R
 import com.example.flo.databinding.ActivityMainBinding
 import com.example.flo.mission.database.database.MusicDatabase
+import com.example.flo.mission.database.entity.SongEntity
 import com.example.flo.mission.database.pref.MusicPreference
 import com.example.flo.mission.model.MusicState
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
@@ -35,6 +40,8 @@ class MainActivity : AppCompatActivity() {
     private var mediaPlayer: MediaPlayer? = null
     private var musicState: MusicState = MusicState.RELEASE
     private var job: Job? = null
+
+    private val musicViewModel: MusicViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
@@ -51,89 +58,147 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.mainFragmentContainerView) as NavHostFragment
-        val navController = navHostFragment.navController
-        binding.bottomNavigationView.setupWithNavController(navController)
-
-        val musicDatabase = MusicDatabase.getInstance(context = this)
-        val musicPreference = MusicPreference(context = this)
-        val songIds = musicPreference.getSongId()
-        if(songIds.isEmpty()) {
-            musicPreference.saveSongId(songDao = musicDatabase.songDao)
-        } else {
-            // 다음 미션
-        }
-
-        // main activity ↔ song activity
-        getResultFromSongActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if(result.resultCode == RESULT_OK) {
-                val songActivityAlbumTitle = result.data?.getStringExtra(INTENT_KEY)
-                Toast.makeText(this, "앨범 제목: $songActivityAlbumTitle", Toast.LENGTH_SHORT).show()
-            }
-        }
-
+        initViews()
         initListeners()
     }
 
-    override fun onStart() {
-        super.onStart()
-        Log.e("ACTIVITY A", "onStart")
-    }
+    private fun initViews() = with(binding) {
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.mainFragmentContainerView) as NavHostFragment
+        val navController = navHostFragment.navController
+        binding.bottomNavigationView.setupWithNavController(navController)
 
-    override fun onResume() {
-        super.onResume()
-        Log.e("ACTIVITY A", "onResume")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.e("ACTIVITY A", "onPause")
-        mediaPlayer?.pause()
-        job?.cancel()
-        musicState = MusicState.PAUSE
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.e("ACTIVITY A", "onStop")
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        Log.e("ACTIVITY A", "onRestart")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.e("ACTIVITY A", "onDestroy")
-        mediaPlayer?.release()
-        mediaPlayer = null
-    }
-
-    private fun initListeners() = with(binding) {
-        ivMusicPlayList.setOnClickListener {
-            val intent = Intent(this@MainActivity, SongDetailActivity::class.java).apply {
-                putExtra(TITLE, tvTrackTitle.text.toString())
-                putExtra(SINGER, tvTrackArtist.text.toString())
-                putExtra(CURRENT_MUSIC_POSITION, mediaPlayer?.currentPosition)
-                putExtra(CURRENT_PLAY_STATE, musicState.name)
+        val musicDatabase = MusicDatabase.getInstance(context = this@MainActivity)
+        val songDao = musicDatabase.songDao
+        val musicPreference = MusicPreference(context = this@MainActivity)
+        val songIds = musicPreference.getSongId()
+        if (songIds.isEmpty()) {
+            musicPreference.saveSongId(songDao = songDao)
+        } else {
+            val songList = mutableListOf<SongEntity>()
+            CoroutineScope(Dispatchers.IO).launch {
+                for (songId in songIds) {
+                    val song = songDao.getSongById(id = songId)
+                    songList.add(song)
+                }
+                withContext(Dispatchers.Main) {
+                    musicViewModel.setSongResources(songResources = songList)
+                }
             }
-            getResultFromSongActivity.launch(intent)
         }
-        ivMusicPlay.setOnClickListener {
-            when(musicState) {
-                MusicState.RELEASE -> {
-                    try {
-                        mediaPlayer = MediaPlayer.create(this@MainActivity, R.raw.sample).apply {
-                            setOnCompletionListener {
-                                mediaPlayer?.release()
-                                mediaPlayer = null
-                                job?.cancel()
-                                musicState = MusicState.RELEASE
-                                seekbarMainMusic.progress = 0
-                                ivMusicPlay.setImageDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_play_filled))
+
+            // main activity ↔ song activity
+            getResultFromSongActivity =
+                registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                    if (result.resultCode == RESULT_OK) {
+                        val songActivityAlbumTitle = result.data?.getStringExtra(INTENT_KEY)
+                        Toast.makeText(
+                            this@MainActivity,
+                            "앨범 제목: $songActivityAlbumTitle",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+        }
+
+        override fun onStart() {
+            super.onStart()
+            Log.e("ACTIVITY A", "onStart")
+        }
+
+        override fun onResume() {
+            super.onResume()
+            Log.e("ACTIVITY A", "onResume")
+        }
+
+        override fun onPause() {
+            super.onPause()
+            Log.e("ACTIVITY A", "onPause")
+            mediaPlayer?.pause()
+            job?.cancel()
+            musicState = MusicState.PAUSE
+        }
+
+        override fun onStop() {
+            super.onStop()
+            Log.e("ACTIVITY A", "onStop")
+        }
+
+        override fun onRestart() {
+            super.onRestart()
+            Log.e("ACTIVITY A", "onRestart")
+        }
+
+        override fun onDestroy() {
+            super.onDestroy()
+            Log.e("ACTIVITY A", "onDestroy")
+            mediaPlayer?.release()
+            mediaPlayer = null
+        }
+
+        private fun initListeners() = with(binding) {
+            ivMusicPlayList.setOnClickListener {
+                val intent = Intent(this@MainActivity, SongDetailActivity::class.java).apply {
+                    putExtra(TITLE, tvTrackTitle.text.toString())
+                    putExtra(SINGER, tvTrackArtist.text.toString())
+                    putExtra(CURRENT_MUSIC_POSITION, mediaPlayer?.currentPosition)
+                    putExtra(CURRENT_PLAY_STATE, musicState.name)
+                }
+                getResultFromSongActivity.launch(intent)
+            }
+            ivMusicPlay.setOnClickListener {
+                when (musicState) {
+                    MusicState.RELEASE -> {
+                        try {
+                            mediaPlayer =
+                                MediaPlayer.create(this@MainActivity, R.raw.sample).apply {
+                                    setOnCompletionListener {
+                                        mediaPlayer?.release()
+                                        mediaPlayer = null
+                                        job?.cancel()
+                                        musicState = MusicState.RELEASE
+                                        seekbarMainMusic.progress = 0
+                                        ivMusicPlay.setImageDrawable(
+                                            ContextCompat.getDrawable(
+                                                this@MainActivity,
+                                                R.drawable.ic_play_filled
+                                            )
+                                        )
+                                    }
+                                }
+                            mediaPlayer?.start()
+                            job = lifecycleScope.launch {
+                                while (isActive) {
+                                    seekbarMainMusic.progress = mediaPlayer?.currentPosition ?: 0
+                                    delay(100L)
+                                }
                             }
+                            musicState = MusicState.PLAYING
+                            seekbarMainMusic.max = mediaPlayer?.duration ?: 0
+                            ivMusicPlay.setImageDrawable(
+                                ContextCompat.getDrawable(
+                                    this@MainActivity,
+                                    R.drawable.ic_pause
+                                )
+                            )
+                        } catch (e: IOException) {
+                            Toast.makeText(this@MainActivity, e.message, Toast.LENGTH_SHORT).show()
                         }
+                    }
+
+                    MusicState.PLAYING -> {
+                        mediaPlayer?.pause()
+                        job?.cancel()
+                        musicState = MusicState.PAUSE
+                        ivMusicPlay.setImageDrawable(
+                            ContextCompat.getDrawable(
+                                this@MainActivity,
+                                R.drawable.ic_play_filled
+                            )
+                        )
+                    }
+
+                    MusicState.PAUSE -> {
                         mediaPlayer?.start()
                         job = lifecycleScope.launch {
                             while (isActive) {
@@ -142,38 +207,22 @@ class MainActivity : AppCompatActivity() {
                             }
                         }
                         musicState = MusicState.PLAYING
-                        seekbarMainMusic.max = mediaPlayer?.duration ?: 0
-                        ivMusicPlay.setImageDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_pause))
-                    } catch (e: IOException) {
-                        Toast.makeText(this@MainActivity, e.message, Toast.LENGTH_SHORT).show()
+                        ivMusicPlay.setImageDrawable(
+                            ContextCompat.getDrawable(
+                                this@MainActivity,
+                                R.drawable.ic_pause
+                            )
+                        )
                     }
-                }
-                MusicState.PLAYING -> {
-                    mediaPlayer?.pause()
-                    job?.cancel()
-                    musicState = MusicState.PAUSE
-                    ivMusicPlay.setImageDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_play_filled))
-                }
-                MusicState.PAUSE -> {
-                    mediaPlayer?.start()
-                    job = lifecycleScope.launch {
-                        while (isActive) {
-                            seekbarMainMusic.progress = mediaPlayer?.currentPosition ?: 0
-                            delay(100L)
-                        }
-                    }
-                    musicState = MusicState.PLAYING
-                    ivMusicPlay.setImageDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_pause))
                 }
             }
         }
-    }
 
-    companion object {
+        companion object {
         const val INTENT_KEY = "KEY"
         const val TITLE = "TITLE"
         const val SINGER = "SINGER"
         const val CURRENT_MUSIC_POSITION = "CURRENT_MUSIC_POSITION"
         const val CURRENT_PLAY_STATE = "CURRENT_PLAY_STATE"
     }
-}
+    }
