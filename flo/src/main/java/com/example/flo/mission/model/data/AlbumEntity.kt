@@ -1,15 +1,18 @@
-package com.example.flo.mission.database.entity
+package com.example.flo.mission.model.data
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Entity(tableName = "AlbumTable")
 data class AlbumEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val title: String = "",
     val artist: String = "",
-    val thumbnail: Int? = null,
+    val image: Int? = null,
     val songs: List<SongEntity>? = null,
     val isLike: Boolean = false,
-)
+): Parcelable

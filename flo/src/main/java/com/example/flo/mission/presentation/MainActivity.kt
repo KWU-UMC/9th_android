@@ -20,9 +20,10 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.flo.R
 import com.example.flo.databinding.ActivityMainBinding
 import com.example.flo.mission.database.database.MusicDatabase
-import com.example.flo.mission.database.entity.SongEntity
+import com.example.flo.mission.model.data.SongEntity
 import com.example.flo.mission.database.pref.MusicPreference
 import com.example.flo.mission.model.MusicState
+import com.example.flo.mission.model.data.AlbumEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -70,6 +71,7 @@ class MainActivity : AppCompatActivity() {
 
         val musicDatabase = MusicDatabase.getInstance(context = this@MainActivity)
         val songDao = musicDatabase.songDao
+        val albumDao = musicDatabase.albumDao
         val musicPreference = MusicPreference(context = this@MainActivity)
         val songIds = musicPreference.getSongId()
         if (songIds.isEmpty()) {
@@ -81,8 +83,10 @@ class MainActivity : AppCompatActivity() {
                     val song = songDao.getSongById(id = songId)
                     songList.add(song)
                 }
+                val albumList = albumDao.getAllAlbums()
                 withContext(Dispatchers.Main) {
                     musicViewModel.setSongResources(songResources = songList)
+                    musicViewModel.setAlbumResources(albumResources = albumList)
                 }
             }
         }

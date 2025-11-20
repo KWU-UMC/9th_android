@@ -5,17 +5,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.example.flo.mission.model.TrackModel
 import com.example.flo.databinding.ItemHomeTodayReleasedAlbumBinding
 import com.example.flo.R
+import com.example.flo.mission.model.data.AlbumEntity
 
-class HomeTrackAdapter(private val context: Context, private val trackList: MutableList<TrackModel>, private val onClicked: (TrackModel) -> Unit): RecyclerView.Adapter<HomeTrackAdapter.ViewHolder>() {
+class HomeAlbumAdapter(private val context: Context, private val trackList: List<AlbumEntity>, private val onClicked: (AlbumEntity) -> Unit): RecyclerView.Adapter<HomeAlbumAdapter.ViewHolder>() {
 
     inner class ViewHolder(private val binding: ItemHomeTodayReleasedAlbumBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: TrackModel) = with(binding) {
-            ivTodayReleasedTrack.setImageDrawable(ContextCompat.getDrawable(context, item.trackThumbnail ?: R.drawable.img_no_track))
-            tvTodayReleasedTrackTitle.text = item.trackTitle
-            tvTodayReleasedTrackArtist.text = item.trackArtist
+        fun bind(item: AlbumEntity) = with(binding) {
+            ivTodayReleasedTrack.setImageDrawable(ContextCompat.getDrawable(context, item.image ?: R.drawable.img_no_track))
+            tvTodayReleasedTrackTitle.text = item.title
+            tvTodayReleasedTrackArtist.text = item.artist
             root.setOnClickListener { onClicked(item) }
         }
     }

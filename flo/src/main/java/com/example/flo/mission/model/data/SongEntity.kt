@@ -1,8 +1,11 @@
-package com.example.flo.mission.database.entity
+package com.example.flo.mission.model.data
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Entity(tableName = "SongTable")
 data class SongEntity(
     @PrimaryKey(autoGenerate = true)
@@ -16,4 +19,4 @@ data class SongEntity(
     val coverImg: Int? = null,
     val isLike: Boolean = false,
     val albumIdx: Int = 0// Reference Key(=Foreign Key) SongEntity ↔ AlbumEntity
-)
+): Parcelable

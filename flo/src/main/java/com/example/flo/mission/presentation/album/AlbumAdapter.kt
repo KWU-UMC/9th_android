@@ -2,15 +2,16 @@ package com.example.flo.mission.presentation.album
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.flo.mission.model.data.SongEntity
 
-class AlbumAdapter(fragment: Fragment): FragmentStateAdapter(fragment) {
+class AlbumAdapter(fragment: Fragment, private val songs: List<SongEntity>?): FragmentStateAdapter(fragment) {
 
     override fun createFragment(position: Int): Fragment {
         return when(position) {
-            0 -> AlbumListFragment()
+            0 -> AlbumSongListFragment(songs = songs)
             1 -> AlbumDetailFragment()
             2 -> AlbumVideoFragment()
-            else -> AlbumListFragment()
+            else -> AlbumSongListFragment(songs = songs)
         }
     }
 

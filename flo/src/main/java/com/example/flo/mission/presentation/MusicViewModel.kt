@@ -3,7 +3,8 @@ package com.example.flo.mission.presentation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.flo.mission.database.entity.SongEntity
+import com.example.flo.mission.model.data.AlbumEntity
+import com.example.flo.mission.model.data.SongEntity
 
 class MusicViewModel: ViewModel() {
 
@@ -12,5 +13,12 @@ class MusicViewModel: ViewModel() {
 
     fun setSongResources(songResources: List<SongEntity>) {
         _songResources.value = songResources
+    }
+
+    private val _albumResources: MutableLiveData<List<AlbumEntity>> = MutableLiveData()
+    val albumResources: LiveData<List<AlbumEntity>> get() = _albumResources
+
+    fun setAlbumResources(albumResources: List<AlbumEntity>) {
+        _albumResources.value = albumResources
     }
 }

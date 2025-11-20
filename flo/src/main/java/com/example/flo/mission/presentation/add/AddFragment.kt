@@ -7,8 +7,8 @@ import androidx.fragment.app.Fragment
 import com.example.flo.R
 import com.example.flo.databinding.FragmentAddBinding
 import com.example.flo.mission.database.database.MusicDatabase
-import com.example.flo.mission.database.entity.AlbumEntity
-import com.example.flo.mission.database.entity.SongEntity
+import com.example.flo.mission.model.data.AlbumEntity
+import com.example.flo.mission.model.data.SongEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -109,11 +109,11 @@ class AddFragment : Fragment(R.layout.fragment_add) {
             val albumDao = musicDatabase.albumDao
             val songDao = musicDatabase.songDao
             val rawAlbumList = listOf(
-                AlbumEntity(title = "1989", artist = "Taylor Swift", thumbnail = R.drawable.img_taylor_swift_album),
-                AlbumEntity(title = "Rare", artist = "Selena Gomez", thumbnail = R.drawable.img_selena_gomez_album),
-                AlbumEntity(title = "Voicenotes", artist = "Charlie Puth", thumbnail = R.drawable.img_charlie_puth_album),
-                AlbumEntity(title = "÷ (Divide)", artist = "Ed Sheeran", thumbnail = R.drawable.img_ed_sheeran_album),
-                AlbumEntity(title = "Teenage Dream", artist = "Katy Perry", thumbnail = R.drawable.img_katy_perry_album),
+                AlbumEntity(title = "1989", artist = "Taylor Swift", image = R.drawable.img_taylor_swift_album),
+                AlbumEntity(title = "Rare", artist = "Selena Gomez", image = R.drawable.img_selena_gomez_album),
+                AlbumEntity(title = "Voicenotes", artist = "Charlie Puth", image = R.drawable.img_charlie_puth_album),
+                AlbumEntity(title = "÷ (Divide)", artist = "Ed Sheeran", image = R.drawable.img_ed_sheeran_album),
+                AlbumEntity(title = "Teenage Dream", artist = "Katy Perry", image = R.drawable.img_katy_perry_album),
             )
             CoroutineScope(Dispatchers.IO).launch {
                 val albumList = albumDao.getAllAlbums()
@@ -122,9 +122,10 @@ class AddFragment : Fragment(R.layout.fragment_add) {
                         val updateSongList = mutableListOf<SongEntity>()
                         val songs = songDao.getSongsByArtist(artist = album.artist)
                         val album = AlbumEntity(
-                            title = album.artist,
+                            title = album.title,
+                            artist = album.artist,
                             songs = songs,
-                            thumbnail = album.thumbnail
+                            image = album.image
                         )
 
                         // 삽입

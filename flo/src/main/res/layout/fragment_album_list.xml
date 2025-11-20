@@ -51,6 +51,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cvMusicTaste"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:listitem="@layout/item_album_list"/>
+        tools:listitem="@layout/item_song_list"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

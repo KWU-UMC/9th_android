@@ -16,8 +16,8 @@
         android:label="fragment_album"
         tools:layout="@layout/fragment_album">
         <argument
-            android:name="track"
-            app:argType="com.example.flo.mission.model.TrackModel"
+            android:name="album"
+            app:argType="com.example.flo.mission.model.data.AlbumEntity"
             app:nullable="true"/>
     </fragment>
     <fragment
