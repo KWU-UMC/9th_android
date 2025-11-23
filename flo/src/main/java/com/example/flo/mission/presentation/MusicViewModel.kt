@@ -21,4 +21,11 @@ class MusicViewModel: ViewModel() {
     fun setAlbumResources(albumResources: List<AlbumEntity>) {
         _albumResources.value = albumResources
     }
+
+    fun updateAlbumResources(oldAlbum: AlbumEntity, newAlbum: AlbumEntity) {
+        val albumResources = _albumResources.value.toMutableList()
+        val updateIndex = albumResources.indexOf(oldAlbum)
+        albumResources[updateIndex] = newAlbum
+        _albumResources.value = albumResources
+    }
 }
