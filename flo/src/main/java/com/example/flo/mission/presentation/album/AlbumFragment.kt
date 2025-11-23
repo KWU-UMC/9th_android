@@ -1,8 +1,6 @@
 package com.example.flo.mission.presentation.album
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -70,7 +68,7 @@ class AlbumFragment : Fragment(R.layout.fragment_album) {
                 CoroutineScope(Dispatchers.IO).launch {
                     albumDao.updateAlbum(album = album.copy(isLike = false))
                     withContext(Dispatchers.Main) {
-                        musicViewModel.updateAlbumResources(oldAlbum = album, newAlbum = album.copy(isLike = false))
+                        musicViewModel.updateAlbum(oldAlbum = album, newAlbum = album.copy(isLike = false))
                         ivAlbumHeart.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_heart_outlined))
                         Toast.makeText(context, "보관함에 삭제되었습니다!", Toast.LENGTH_SHORT).show()
                     }
@@ -79,7 +77,7 @@ class AlbumFragment : Fragment(R.layout.fragment_album) {
                 CoroutineScope(Dispatchers.IO).launch {
                     albumDao.updateAlbum(album = album.copy(isLike = true))
                     withContext(Dispatchers.Main) {
-                        musicViewModel.updateAlbumResources(oldAlbum = album, newAlbum = album.copy(isLike = true))
+                        musicViewModel.updateAlbum(oldAlbum = album, newAlbum = album.copy(isLike = true))
                         ivAlbumHeart.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_heart_filled))
                         Toast.makeText(context, "보관함에 저장되었습니다!", Toast.LENGTH_SHORT).show()
                     }

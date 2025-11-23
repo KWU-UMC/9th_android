@@ -1,6 +1,7 @@
 package com.example.flo.mission.presentation.archive
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -11,11 +12,12 @@ import com.example.flo.databinding.ItemArchiveSaveAlbumBinding
 import com.example.flo.mission.database.entity.AlbumEntity
 
 class ArchiveSaveAlbumAdapter(
-    private val items: List<AlbumEntity>,
+    items: List<AlbumEntity>,
     private val context: Context
 ): RecyclerView.Adapter<ArchiveSaveAlbumAdapter.ArchiveSaveAlbumViewHolder>() {
 
     private var mutableItems: MutableList<AlbumEntity> = items.toMutableList()
+    var onItemDeleteListener: OnItemDeleteListener? = null
 
     inner class ArchiveSaveAlbumViewHolder(private val binding: ItemArchiveSaveAlbumBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: AlbumEntity) = with(binding) {
@@ -56,8 +58,11 @@ class ArchiveSaveAlbumAdapter(
             }
             ivArchiveSaveAlbumOption.setOnClickListener {
                 if(bindingAdapterPosition != RecyclerView.NO_POSITION) {
+                    // adapter 내 UI 처리
                     mutableItems.removeAt(bindingAdapterPosition)
                     notifyItemRemoved(bindingAdapterPosition)
+                    // DB 및 다른 화면에서도 해당 앨범이 보이지 않도록 하기 위해 Fragment 로 이벤트 알리기
+                    onItemDeleteListener?.onDeleteIconClick(album = item)
                 }
             }
         }

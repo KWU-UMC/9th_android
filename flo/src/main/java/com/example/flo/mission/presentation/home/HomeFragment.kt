@@ -13,7 +13,10 @@ import com.example.flo.databinding.FragmentHomeBinding
 import com.example.flo.mission.database.DatabaseModule
 import com.example.flo.mission.presentation.MusicViewModel
 import com.example.flo.mission.presentation.MusicViewModelFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
@@ -49,7 +52,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun initObservers() = with(binding) {
         musicViewModel.albumResources.observe(viewLifecycleOwner) { albumList ->
-            Log.e("TEST", "" + albumList)
+            if(albumList.isEmpty()) {
+                CoroutineScope(Dispatchers.IO).launch {
+                    musicViewModel.initializeAlbum()
+                }
+                return@observe
+            }
             val albumAdapter = HomeAlbumAdapter(requireContext(), albumList) { album ->
                 val action = HomeFragmentDirections.actionHomeFragmentToAlbumFragment(album)
                 findNavController().navigate(action)

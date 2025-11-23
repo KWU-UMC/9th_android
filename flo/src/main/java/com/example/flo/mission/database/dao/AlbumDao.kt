@@ -1,6 +1,7 @@
 package com.example.flo.mission.database.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
@@ -17,4 +18,6 @@ interface AlbumDao {
     @Update
     fun updateAlbum(album: AlbumEntity)
 
+    @Delete
+    fun deleteAlbum(album: AlbumEntity)
 }

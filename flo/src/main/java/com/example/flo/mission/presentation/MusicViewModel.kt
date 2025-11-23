@@ -41,7 +41,7 @@ class MusicViewModel(private val albumDao: AlbumDao, private val songDao: SongDa
     private val _albumResources: MutableLiveData<List<AlbumEntity>> = MutableLiveData()
     val albumResources: LiveData<List<AlbumEntity>> get() = _albumResources
 
-    private fun initializeSong() {
+    fun initializeSong() {
         val songList = songDao.getAllSongs()
         if (songList.isEmpty()) {
             songDao.insertSong(
@@ -141,7 +141,7 @@ class MusicViewModel(private val albumDao: AlbumDao, private val songDao: SongDa
         }
     }
 
-    private suspend fun initializeAlbum() {
+    suspend fun initializeAlbum() {
         val albumList = albumDao.getAllAlbums()
         if (albumList.isEmpty()) {
             for (rawAlbum in rawAlbumList) {
@@ -166,8 +166,9 @@ class MusicViewModel(private val albumDao: AlbumDao, private val songDao: SongDa
                     )
                 )
             }
+            val updatedAlbumList = albumDao.getAllAlbums()
             withContext(Dispatchers.Main) {
-                _albumResources.value = albumDao.getAllAlbums()
+                _albumResources.value = updatedAlbumList
             }
         } else {
             withContext(Dispatchers.Main) {
@@ -176,14 +177,21 @@ class MusicViewModel(private val albumDao: AlbumDao, private val songDao: SongDa
         }
     }
 
-    fun setAlbumResources(albumResources: List<AlbumEntity>) {
-        _albumResources.value = albumResources
-    }
-
-    fun updateAlbumResources(oldAlbum: AlbumEntity, newAlbum: AlbumEntity) {
+    fun updateAlbum(oldAlbum: AlbumEntity, newAlbum: AlbumEntity) {
         val albumResources = _albumResources.value.toMutableList()
         val updateIndex = albumResources.indexOf(oldAlbum)
         albumResources[updateIndex] = newAlbum
         _albumResources.value = albumResources
+    }
+
+    fun deleteAlbum(album: AlbumEntity) {
+        viewModelScope.launch(Dispatchers.IO) {
+            albumDao.deleteAlbum(album = album)
+            val albumResources = _albumResources.value.toMutableList()
+            albumResources.remove(album)
+            withContext(Dispatchers.Main) {
+                _albumResources.value = albumResources
+            }
+        }
     }
 }
