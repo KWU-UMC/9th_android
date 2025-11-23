@@ -1,6 +1,7 @@
 package com.example.flo.mission.presentation.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -9,14 +10,19 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.flo.R
 import com.example.flo.databinding.FragmentHomeBinding
+import com.example.flo.mission.database.DatabaseModule
 import com.example.flo.mission.presentation.MusicViewModel
+import com.example.flo.mission.presentation.MusicViewModelFactory
 import kotlinx.coroutines.Job
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private lateinit var binding: FragmentHomeBinding
     private var job: Job? = null
-    private val musicViewModel: MusicViewModel by activityViewModels()
+
+    private val musicViewModel: MusicViewModel by activityViewModels {
+        MusicViewModelFactory(albumDao = DatabaseModule.albumDao, songDao = DatabaseModule.songDao)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,6 +49,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun initObservers() = with(binding) {
         musicViewModel.albumResources.observe(viewLifecycleOwner) { albumList ->
+            Log.e("TEST", "" + albumList)
             val albumAdapter = HomeAlbumAdapter(requireContext(), albumList) { album ->
                 val action = HomeFragmentDirections.actionHomeFragmentToAlbumFragment(album)
                 findNavController().navigate(action)

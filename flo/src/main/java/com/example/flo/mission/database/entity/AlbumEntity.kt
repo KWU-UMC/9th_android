@@ -3,6 +3,7 @@ package com.example.flo.mission.database.entity
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.flo.mission.model.MusicState
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -12,7 +13,11 @@ data class AlbumEntity(
     val id: Int = 0,
     val title: String = "",
     val artist: String = "",
-    val image: Int? = null,
+    val image: Int = 0,
+    val releaseDate: String = "",
+    val format: String = "",
+    val genre: String = "",
+    val playState: MusicState = MusicState.RELEASE,
     val songs: List<SongEntity>? = null,
     val isLike: Boolean = false,
 ): Parcelable
