@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">FLO</string>
     <string name="title_home">홈</string>
-    <string name="title_album">앨범</string>
+    <string name="title_explore">둘러보기</string>
     <string name="title_add">추가</string>
     <string name="title_archive">보관함</string>
 </resources>

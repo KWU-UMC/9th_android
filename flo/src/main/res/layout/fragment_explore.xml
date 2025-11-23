@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".mission.presentation.explore.ExploreFragment">
+
+    <TextView
+        android:id="@+id/tvExploreTitleExplore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="둘러보기"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_margin="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <HorizontalScrollView
+        android:id="@+id/scrollExploreChip"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvExploreTitleExplore">
+
+        <com.google.android.material.chip.ChipGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:singleLine="true"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                style="@style/ExploreChip"
+                android:checked="true"
+                android:text="차트" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/ExploreChip"
+                android:text="영상" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/ExploreChip"
+                android:text="장르" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/ExploreChip"
+                android:text="상황" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/ExploreChip"
+                android:text="분위기" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/ExploreChip"
+                android:text="시즌" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/ExploreChip"
+                android:text="조회수" />
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
+
+    <TextView
+        android:id="@+id/tvExploreTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="차트"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toBottomOf="@id/scrollExploreChip"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_arrow_right"
+        android:layout_marginStart="4dp"
+        app:layout_constraintTop_toTopOf="@id/tvExploreTitle"
+        app:layout_constraintStart_toEndOf="@id/tvExploreTitle"
+        app:layout_constraintBottom_toBottomOf="@id/tvExploreTitle"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="12dp"
+        app:layout_constraintTop_toBottomOf="@id/tvExploreTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+            <TextView
+                android:id="@+id/tvExploreTitleChart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FLO 차트"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+            <TextView
+                android:id="@+id/tvExploreChartBaseTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="19시 기준"
+                android:textColor="@color/gray_700"
+                android:layout_marginStart="4dp"
+                app:layout_constraintTop_toTopOf="@id/tvExploreTitleChart"
+                app:layout_constraintStart_toEndOf="@id/tvExploreTitleChart"
+                app:layout_constraintBottom_toBottomOf="@id/tvExploreTitleChart"/>
+            <TextView
+                android:id="@+id/tvExploreChartAggregationRange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="최근 24시간 집계"
+                android:textColor="@color/gray_700"
+                android:layout_marginTop="4dp"
+                app:layout_constraintTop_toBottomOf="@id/tvExploreTitleChart"
+                app:layout_constraintStart_toStartOf="@id/tvExploreTitleChart"/>
+            <ImageView
+                android:id="@+id/ivExploreChartPlayAll"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_play_outlined"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintTop_toTopOf="@id/tvExploreChartPlayAll"
+                app:layout_constraintEnd_toStartOf="@id/tvExploreChartPlayAll"
+                app:layout_constraintBottom_toBottomOf="@id/tvExploreChartPlayAll"/>
+            <TextView
+                android:id="@+id/tvExploreChartPlayAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="전체듣기"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--<com.google.android.material.chip.Chip-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--style="@style/Widget.MaterialComponents.Chip.Choice"-->
+    <!--android:text="차트"-->
+    <!--android:textColor="@color/explore_chip_text"-->
+    <!--android:checked="true"-->
+    <!--app:chipBackgroundColor="@color/explore_chip_background"/>-->

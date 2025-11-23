@@ -6,9 +6,9 @@
         android:icon="@drawable/ic_home"/>
 
     <item
-        android:id="@+id/albumFragment"
-        android:title="@string/title_album"
-        android:icon="@drawable/ic_album"/>
+        android:id="@+id/exploreFragment"
+        android:title="@string/title_explore"
+        android:icon="@drawable/ic_explore"/>
 
     <item
         android:id="@+id/addFragment"

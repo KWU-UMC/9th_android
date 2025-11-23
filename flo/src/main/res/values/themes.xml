@@ -13,6 +13,13 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
     </style>
 
+    <style name="ExploreChip" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/explore_chip_text</item>
+        <item name="chipBackgroundColor">@color/explore_chip_background</item>
+    </style>
+
     <!-- Splash Screen theme -->
     <style name="SplashScreen" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:windowSplashScreenBackground">@color/white</item>
