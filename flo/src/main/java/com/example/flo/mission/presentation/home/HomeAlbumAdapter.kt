@@ -7,7 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flo.databinding.ItemHomeTodayReleasedAlbumBinding
 import com.example.flo.R
-import com.example.flo.mission.model.data.AlbumEntity
+import com.example.flo.mission.database.entity.AlbumEntity
 
 class HomeAlbumAdapter(private val context: Context, private val trackList: List<AlbumEntity>, private val onClicked: (AlbumEntity) -> Unit): RecyclerView.Adapter<HomeAlbumAdapter.ViewHolder>() {
 

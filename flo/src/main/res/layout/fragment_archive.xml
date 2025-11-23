@@ -46,8 +46,8 @@
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="@id/tvArchiveTitle"
             app:layout_constraintTop_toBottomOf="@id/tvArchiveTitle"
-            app:tabIndicatorColor="@color/tab_indicator_color"
-            app:tabSelectedTextColor="@color/tab_indicator_color"
+            app:tabIndicatorColor="@color/primary"
+            app:tabSelectedTextColor="@color/primary"
             app:tabMinWidth="100dp"
             app:tabPaddingEnd="16dp"
             app:tabPaddingStart="16dp">

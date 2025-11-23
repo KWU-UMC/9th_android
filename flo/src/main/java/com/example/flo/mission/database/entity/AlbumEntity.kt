@@ -1,4 +1,4 @@
-package com.example.flo.mission.model.data
+package com.example.flo.mission.database.entity
 
 import android.os.Parcelable
 import androidx.room.Entity

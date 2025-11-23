@@ -7,8 +7,8 @@ import androidx.fragment.app.Fragment
 import com.example.flo.R
 import com.example.flo.databinding.FragmentAddBinding
 import com.example.flo.mission.database.database.MusicDatabase
-import com.example.flo.mission.model.data.AlbumEntity
-import com.example.flo.mission.model.data.SongEntity
+import com.example.flo.mission.database.entity.AlbumEntity
+import com.example.flo.mission.database.entity.SongEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

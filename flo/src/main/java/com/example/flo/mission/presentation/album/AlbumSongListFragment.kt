@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.flo.R
 import com.example.flo.databinding.FragmentAlbumListBinding
-import com.example.flo.mission.model.data.SongEntity
+import com.example.flo.mission.database.entity.SongEntity
 
 class AlbumSongListFragment(private val songs: List<SongEntity>?) : Fragment(R.layout.fragment_album_list) {
 

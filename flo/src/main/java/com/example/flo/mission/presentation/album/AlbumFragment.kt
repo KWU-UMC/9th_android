@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.example.flo.R
 import com.example.flo.databinding.FragmentAlbumBinding
-import com.example.flo.mission.model.data.AlbumEntity
+import com.example.flo.mission.database.entity.AlbumEntity
 import com.google.android.material.tabs.TabLayoutMediator
 
 class AlbumFragment : Fragment(R.layout.fragment_album) {
