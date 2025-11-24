@@ -1,15 +1,15 @@
-package com.example.flo.mission.database.database
+package com.example.flo.mission.data.local.room.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.flo.mission.database.SongConverter
-import com.example.flo.mission.database.dao.AlbumDao
-import com.example.flo.mission.database.dao.SongDao
-import com.example.flo.mission.database.entity.AlbumEntity
-import com.example.flo.mission.database.entity.SongEntity
+import com.example.flo.mission.data.local.room.SongConverter
+import com.example.flo.mission.data.local.room.dao.AlbumDao
+import com.example.flo.mission.data.local.room.dao.SongDao
+import com.example.flo.mission.data.local.room.entity.AlbumEntity
+import com.example.flo.mission.data.local.room.entity.SongEntity
 
 @Database(entities = [SongEntity::class, AlbumEntity::class], version = 2)
 @TypeConverters(SongConverter::class)

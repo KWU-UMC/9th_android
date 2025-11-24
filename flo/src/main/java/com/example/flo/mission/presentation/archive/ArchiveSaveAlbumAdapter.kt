@@ -1,7 +1,6 @@
 package com.example.flo.mission.presentation.archive
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -9,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.flo.mission.model.MusicState
 import com.example.flo.R
 import com.example.flo.databinding.ItemArchiveSaveAlbumBinding
-import com.example.flo.mission.database.entity.AlbumEntity
+import com.example.flo.mission.data.local.room.entity.AlbumEntity
 
 class ArchiveSaveAlbumAdapter(
     items: List<AlbumEntity>,

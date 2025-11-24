@@ -2,17 +2,9 @@ package com.example.flo.mission.presentation.add
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.flo.R
 import com.example.flo.databinding.FragmentAddBinding
-import com.example.flo.mission.database.database.MusicDatabase
-import com.example.flo.mission.database.entity.AlbumEntity
-import com.example.flo.mission.database.entity.SongEntity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class AddFragment : Fragment(R.layout.fragment_add) {
 

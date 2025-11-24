@@ -1,11 +1,11 @@
-package com.example.flo.mission.database.dao
+package com.example.flo.mission.data.local.room.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.example.flo.mission.database.entity.AlbumEntity
+import com.example.flo.mission.data.local.room.entity.AlbumEntity
 
 @Dao
 interface AlbumDao {

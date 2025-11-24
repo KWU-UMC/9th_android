@@ -8,8 +8,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.flo.R
 import com.example.flo.databinding.ActivitySignUpBinding
-import com.example.flo.mission.database.database.UserDatabase
-import com.example.flo.mission.database.entity.UserEntity
+import com.example.flo.mission.data.local.room.database.UserDatabase
+import com.example.flo.mission.data.local.room.entity.UserEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

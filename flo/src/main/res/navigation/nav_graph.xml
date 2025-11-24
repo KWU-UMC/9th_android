@@ -17,7 +17,7 @@
         tools:layout="@layout/fragment_album">
         <argument
             android:name="album"
-            app:argType="com.example.flo.mission.database.entity.AlbumEntity"
+            app:argType="com.example.flo.mission.data.local.room.entity.AlbumEntity"
             app:nullable="true"/>
     </fragment>
     <fragment

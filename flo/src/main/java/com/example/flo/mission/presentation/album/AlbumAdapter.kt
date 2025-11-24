@@ -2,7 +2,7 @@ package com.example.flo.mission.presentation.album
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.flo.mission.database.entity.SongEntity
+import com.example.flo.mission.data.local.room.entity.SongEntity
 
 class AlbumAdapter(fragment: Fragment, private val songs: List<SongEntity>?): FragmentStateAdapter(fragment) {
 

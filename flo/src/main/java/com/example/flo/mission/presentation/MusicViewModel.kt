@@ -5,10 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.flo.R
-import com.example.flo.mission.database.dao.AlbumDao
-import com.example.flo.mission.database.dao.SongDao
-import com.example.flo.mission.database.entity.AlbumEntity
-import com.example.flo.mission.database.entity.SongEntity
+import com.example.flo.mission.data.local.room.dao.AlbumDao
+import com.example.flo.mission.data.local.room.dao.SongDao
+import com.example.flo.mission.data.local.room.entity.AlbumEntity
+import com.example.flo.mission.data.local.room.entity.SongEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

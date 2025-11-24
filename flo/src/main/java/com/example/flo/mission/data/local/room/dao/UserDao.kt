@@ -1,9 +1,9 @@
-package com.example.flo.mission.database.dao
+package com.example.flo.mission.data.local.room.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.flo.mission.database.entity.UserEntity
+import com.example.flo.mission.data.local.room.entity.UserEntity
 
 @Dao
 interface UserDao {

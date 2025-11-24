@@ -1,11 +1,11 @@
-package com.example.flo.mission.database.database
+package com.example.flo.mission.data.local.room.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.flo.mission.database.dao.UserDao
-import com.example.flo.mission.database.entity.UserEntity
+import com.example.flo.mission.data.local.room.dao.UserDao
+import com.example.flo.mission.data.local.room.entity.UserEntity
 
 @Database(entities = [UserEntity::class], version = 1)
 abstract class UserDatabase: RoomDatabase() {

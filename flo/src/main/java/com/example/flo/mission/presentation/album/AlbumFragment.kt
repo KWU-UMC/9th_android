@@ -10,8 +10,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.flo.R
 import com.example.flo.databinding.FragmentAlbumBinding
-import com.example.flo.mission.database.database.MusicDatabase
-import com.example.flo.mission.database.entity.AlbumEntity
+import com.example.flo.mission.data.local.room.database.MusicDatabase
+import com.example.flo.mission.data.local.room.entity.AlbumEntity
 import com.example.flo.mission.presentation.MusicViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.CoroutineScope

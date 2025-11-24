@@ -1,7 +1,7 @@
-package com.example.flo.mission.database.pref
+package com.example.flo.mission.data.local.pref
 
 import android.content.Context
-import com.example.flo.mission.database.dao.SongDao
+import com.example.flo.mission.data.local.room.dao.SongDao
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

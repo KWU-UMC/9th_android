@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flo.databinding.ItemSongListBinding
-import com.example.flo.mission.database.entity.SongEntity
+import com.example.flo.mission.data.local.room.entity.SongEntity
 import java.util.Locale
 
 class AlbumSongListAdapter(private val songs: List<SongEntity>): RecyclerView.Adapter<AlbumSongListAdapter.ViewHolder>() {

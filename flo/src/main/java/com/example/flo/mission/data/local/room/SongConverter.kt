@@ -1,7 +1,7 @@
-package com.example.flo.mission.database
+package com.example.flo.mission.data.local.room
 
 import androidx.room.TypeConverter
-import com.example.flo.mission.database.entity.SongEntity
+import com.example.flo.mission.data.local.room.entity.SongEntity
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
