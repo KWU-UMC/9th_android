@@ -19,13 +19,22 @@
         android:layout_gravity="center_horizontal"/>
 
     <EditText
+        android:id="@+id/etSignUpName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="이름(닉네임)"
+        android:textColorHint="@color/gray_200"
+        android:backgroundTint="@color/gray_200"
+        android:layout_marginTop="32dp"/>
+
+    <EditText
         android:id="@+id/etSignUpEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="아이디(이메일)"
         android:textColorHint="@color/gray_200"
         android:backgroundTint="@color/gray_200"
-        android:layout_marginTop="32dp"/>
+        android:layout_marginTop="12dp"/>
 
     <EditText
         android:id="@+id/etSignUpPassword"

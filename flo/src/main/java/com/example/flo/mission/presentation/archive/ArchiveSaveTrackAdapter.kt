@@ -5,20 +5,20 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.example.flo.mission.model.TrackModel
+import com.example.flo.mission.domain.model.Track
 import com.example.flo.R
 import com.example.flo.databinding.ItemArchiveSaveTrackBinding
 
-class ArchiveSaveTrackAdapter(private val context: Context, trackList: MutableList<TrackModel>): RecyclerView.Adapter<ArchiveSaveTrackAdapter.ViewHolder>() {
+class ArchiveSaveTrackAdapter(private val context: Context, trackList: MutableList<Track>): RecyclerView.Adapter<ArchiveSaveTrackAdapter.ViewHolder>() {
 
-    private var trackLists: MutableList<TrackModel>
+    private var trackLists: MutableList<Track>
 
     init {
         this.trackLists = trackList
     }
 
     inner class ViewHolder(private val binding: ItemArchiveSaveTrackBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: TrackModel) = with(binding) {
+        fun bind(item: Track) = with(binding) {
             ivArchiveSaveTrackThumbnail.setImageDrawable(ContextCompat.getDrawable(context, item.trackThumbnail ?: R.drawable.img_no_track))
             tvArchiveSaveTrackTitle.text = item.trackTitle
             tvArchiveSaveTrackArtist.text = item.trackArtist

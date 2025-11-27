@@ -68,5 +68,10 @@ dependencies {
     implementation(libs.gson)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.retrofit) // retrofit
+    implementation(libs.converter.gson) // gson(json parser)
+    implementation(libs.logging.interceptor) // 로그 출력
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
     kapt(libs.androidx.room.compiler)
 }

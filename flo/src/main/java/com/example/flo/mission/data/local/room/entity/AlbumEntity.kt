@@ -3,7 +3,7 @@ package com.example.flo.mission.data.local.room.entity
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.flo.mission.model.MusicState
+import com.example.flo.mission.domain.model.MusicState
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

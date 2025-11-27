@@ -5,7 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.flo.R
-import com.example.flo.mission.model.TrackModel
+import com.example.flo.mission.domain.model.Track
 import com.example.flo.databinding.FragmentArchiveSaveTrackBinding
 
 class ArchiveSaveTrackFragment : Fragment(R.layout.fragment_archive_save_track) {
@@ -20,52 +20,52 @@ class ArchiveSaveTrackFragment : Fragment(R.layout.fragment_archive_save_track) 
 
     private fun initViews() = with(binding) {
         val testArchiveSaveTrackList = mutableListOf(
-            TrackModel(
+            Track(
                 trackTitle = "Starry Night",
                 trackArtist = "Vincent",
                 trackThumbnail = R.drawable.img_track_sample_one
             ),
-            TrackModel(
+            Track(
                 trackTitle = "Bohemian Rhapsody",
                 trackArtist = "Queen",
                 trackThumbnail = R.drawable.img_track_sample_two
             ),
-            TrackModel(
+            Track(
                 trackTitle = "Imagine",
                 trackArtist = "John Lennon",
                 trackThumbnail = R.drawable.img_track_sample_three
             ),
-            TrackModel(
+            Track(
                 trackTitle = "Havana",
                 trackArtist = "Camila Cabello",
                 trackThumbnail = R.drawable.img_track_sample_four
             ),
-            TrackModel(
+            Track(
                 trackTitle = "Shape of You",
                 trackArtist = "Ed Sheeran",
                 trackThumbnail = R.drawable.img_track_sample_five
             ),
-            TrackModel(
+            Track(
                 trackTitle = "Someone Like You",
                 trackArtist = "Adele",
                 trackThumbnail = R.drawable.img_track_sample_six
             ),
-            TrackModel(
+            Track(
                 trackTitle = "Blinding Lights",
                 trackArtist = "The Weekend",
                 trackThumbnail = R.drawable.img_track_sample_one
             ),
-            TrackModel(
+            Track(
                 trackTitle = "Good 4 u",
                 trackArtist = "Olivia Rodrigo",
                 trackThumbnail = R.drawable.img_track_sample_two
             ),
-            TrackModel(
+            Track(
                 trackTitle = "Levitating",
                 trackArtist = "Dua Lipa",
                 trackThumbnail = R.drawable.img_track_sample_three
             ),
-            TrackModel(
+            Track(
                 trackTitle = "As It Was",
                 trackArtist = "Harry Styles",
                 trackThumbnail = R.drawable.img_track_sample_four

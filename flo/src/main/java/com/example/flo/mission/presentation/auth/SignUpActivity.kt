@@ -3,6 +3,7 @@ package com.example.flo.mission.presentation.auth
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -10,6 +11,7 @@ import com.example.flo.R
 import com.example.flo.databinding.ActivitySignUpBinding
 import com.example.flo.mission.data.local.room.database.UserDatabase
 import com.example.flo.mission.data.local.room.entity.UserEntity
+import com.example.flo.mission.presentation.AuthViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,6 +20,7 @@ import kotlinx.coroutines.withContext
 class SignUpActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignUpBinding
+    private val authViewModel: AuthViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,33 +34,56 @@ class SignUpActivity : AppCompatActivity() {
             insets
         }
         initListeners()
+        initObservers()
     }
 
     private fun initListeners() = with(binding) {
         btnSignUp.setOnClickListener {
-            if(etSignUpEmail.text.isBlank() || etSignUpPassword.text.isBlank()) {
-                Toast.makeText(this@SignUpActivity, "정보를 다 입력하지 않았습니다.", Toast.LENGTH_SHORT).show()
-            } else {
-                val database = UserDatabase.getInstance(context = this@SignUpActivity)
-                val userDao = database.userDao
+            val name = etSignUpName.text.toString().trim()
+            val email = etSignUpEmail.text.toString().trim()
+            val password = etSignUpPassword.text.toString().trim()
 
-                // 메인 스레드가 아닌 UI 스레드에서 DB 작업 실행
-                CoroutineScope(Dispatchers.IO).launch {
-                    val email = etSignUpEmail.text.trim().toString()
-                    val password = etSignUpPassword.text.trim().toString()
-                    val user: UserEntity? = userDao.getUserByEmail(email = email)
-                    if(user == null) {
-                        userDao.insertUser(user = UserEntity(email = email, password = password))
-                        withContext(Dispatchers.Main) {
-                            Toast.makeText(this@SignUpActivity, "회원가입이 완료되었습니다.", Toast.LENGTH_SHORT).show()
-                            finish()
-                        }
-                    } else {
-                        withContext(Dispatchers.Main) {
-                            Toast.makeText(this@SignUpActivity, "중복된 아이디가 이미 존재합니다.", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                }
+            if(name.isEmpty() || email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this@SignUpActivity, "모든 정보를 입력해주세요.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            authViewModel.signup(name = name, email = email, password = password)
+//            if(etSignUpEmail.text.isBlank() || etSignUpPassword.text.isBlank()) {
+//                Toast.makeText(this@SignUpActivity, "정보를 다 입력하지 않았습니다.", Toast.LENGTH_SHORT).show()
+//            } else {
+//                val database = UserDatabase.getInstance(context = this@SignUpActivity)
+//                val userDao = database.userDao
+//
+//                // 메인 스레드가 아닌 UI 스레드에서 DB 작업 실행
+//                CoroutineScope(Dispatchers.IO).launch {
+//                    val email = etSignUpEmail.text.trim().toString()
+//                    val password = etSignUpPassword.text.trim().toString()
+//                    val user: UserEntity? = userDao.getUserByEmail(email = email)
+//                    if(user == null) {
+//                        userDao.insertUser(user = UserEntity(email = email, password = password))
+//                        withContext(Dispatchers.Main) {
+//                            Toast.makeText(this@SignUpActivity, "회원가입이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+//                            finish()
+//                        }
+//                    } else {
+//                        withContext(Dispatchers.Main) {
+//                            Toast.makeText(this@SignUpActivity, "중복된 아이디가 이미 존재합니다.", Toast.LENGTH_SHORT).show()
+//                        }
+//                    }
+//                }
+//            }
+        }
+    }
+
+    private fun initObservers() = with(binding) {
+        authViewModel.signupResult.observe(this@SignUpActivity) { result ->
+            result.onSuccess { data ->
+                Toast.makeText(this@SignUpActivity, "회원가입에 성공했습니다.", Toast.LENGTH_SHORT).show()
+                authViewModel.memberId = data.memberId
+            }.onFailure { error ->
+                val message = error.message ?: "알 수 없는 오류가 발생했습니다."
+                Toast.makeText(this@SignUpActivity, "회원가입 실패: $message", Toast.LENGTH_SHORT).show()
             }
         }
     }

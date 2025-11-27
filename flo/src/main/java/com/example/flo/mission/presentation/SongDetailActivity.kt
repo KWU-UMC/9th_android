@@ -11,8 +11,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
-import com.example.flo.mission.model.MusicRepeatState
-import com.example.flo.mission.model.MusicState
+import com.example.flo.mission.domain.model.MusicRepeatState
+import com.example.flo.mission.domain.model.MusicState
 import com.example.flo.R
 import com.example.flo.databinding.ActivitySongDetailBinding
 import kotlinx.coroutines.Job

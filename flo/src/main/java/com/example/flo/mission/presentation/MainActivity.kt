@@ -18,7 +18,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.flo.R
 import com.example.flo.databinding.ActivityMainBinding
-import com.example.flo.mission.model.MusicState
+import com.example.flo.mission.domain.model.MusicState
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive

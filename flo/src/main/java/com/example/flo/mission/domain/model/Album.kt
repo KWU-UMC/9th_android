@@ -1,6 +1,6 @@
-package com.example.flo.mission.model
+package com.example.flo.mission.domain.model
 
-data class AlbumModel(
+data class Album(
     val albumId: Int,
     val albumTitle: String,
     val albumThumbnail: Int,
