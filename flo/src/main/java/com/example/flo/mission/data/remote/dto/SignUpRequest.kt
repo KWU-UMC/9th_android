@@ -6,10 +6,6 @@ data class SignUpRequest(
     val password: String
 )
 
-data class SignUpData(
-    val memberId: Int
-)
-
 ////////////////////////////////////////////////////////////////
 
 data class LoginRequest(
@@ -32,12 +28,12 @@ data class LoginData(
 
 ////////////////////////////////////////////////////////////////
 
-data class ChangeRequest(
+data class UpdateMemberRequest(
     val memberId: Int,
     val newName: String,
     val newPassword: String
 )
 
-data class ChangeData(
+data class MemberIdResponse(
     val memberId: Int
 )

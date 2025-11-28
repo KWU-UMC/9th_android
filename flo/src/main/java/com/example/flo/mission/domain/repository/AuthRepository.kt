@@ -1,15 +1,13 @@
 package com.example.flo.mission.domain.repository
 
 import com.example.flo.mission.data.remote.NetworkService
-import com.example.flo.mission.data.remote.dto.ChangeData
-import com.example.flo.mission.data.remote.dto.ChangeRequest
-import com.example.flo.mission.data.remote.dto.SignUpData
+import com.example.flo.mission.data.remote.dto.MemberIdResponse
 import com.example.flo.mission.data.remote.dto.SignUpRequest
-import java.lang.Exception
+import com.example.flo.mission.data.remote.dto.UpdateMemberRequest
 
 class AuthRepository(private val networkService: NetworkService) {
 
-    suspend fun signup(req: SignUpRequest): Result<SignUpData> = try {
+    suspend fun signup(req: SignUpRequest): Result<MemberIdResponse> = try {
         val response = networkService.signup(req = req)
         if (response.isSuccessful) {
             val body = response.body()
@@ -28,7 +26,7 @@ class AuthRepository(private val networkService: NetworkService) {
         Result.failure(e)
     }
 
-    suspend fun changeInfo(accessToken: String, req: ChangeRequest): Result<ChangeData> = try {
+    suspend fun changeInfo(accessToken: String, req: UpdateMemberRequest): Result<MemberIdResponse> = try {
         val token = if(accessToken.startsWith("Bearer ")) accessToken else "Bearer $accessToken"
         val response = networkService.changeInfo(token = token, req = req)
         if(response.isSuccessful) {
