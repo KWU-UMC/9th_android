@@ -8,7 +8,7 @@ import com.example.flo.mission.data.local.room.entity.UserEntity
 @Dao
 interface UserDao {
     @Insert
-    fun insertUser(user: UserEntity)
+    suspend fun insertUser(user: UserEntity)
 
     @Query("SELECT * FROM usertable WHERE email = :email")
     fun getUserByEmail(email: String): UserEntity?

@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit
 
 object NetworkClient {
 
-    private val BASE_URL = "http://43.200.73.115:8080/"
+    private val BASE_URL = "http://43.200.73.115:8080"
 
     // 로그 진행상황
     private val logging = HttpLoggingInterceptor().apply {

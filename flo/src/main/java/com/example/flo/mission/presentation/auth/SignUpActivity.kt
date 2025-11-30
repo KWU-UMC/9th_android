@@ -9,9 +9,13 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.flo.R
 import com.example.flo.databinding.ActivitySignUpBinding
+import com.example.flo.mission.data.local.room.RoomDatabaseModule.userDao
 import com.example.flo.mission.data.local.room.database.UserDatabase
 import com.example.flo.mission.data.local.room.entity.UserEntity
+import com.example.flo.mission.data.remote.NetworkClient
+import com.example.flo.mission.domain.repository.AuthRepository
 import com.example.flo.mission.presentation.AuthViewModel
+import com.example.flo.mission.presentation.AuthViewModelFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,7 +24,11 @@ import kotlinx.coroutines.withContext
 class SignUpActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignUpBinding
-    private val authViewModel: AuthViewModel by viewModels()
+    private val authViewModel: AuthViewModel by viewModels {
+        AuthViewModelFactory(repository = AuthRepository(networkService = NetworkClient.networkService))
+    }
+    private var email: String = ""
+    private var password: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +38,12 @@ class SignUpActivity : AppCompatActivity() {
         val extraPadding = resources.getDimensionPixelSize(R.dimen.activity_default_padding)
         ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left + extraPadding, systemBars.top + extraPadding, systemBars.right + extraPadding, systemBars.bottom + extraPadding)
+            v.setPadding(
+                systemBars.left + extraPadding,
+                systemBars.top + extraPadding,
+                systemBars.right + extraPadding,
+                systemBars.bottom + extraPadding
+            )
             insets
         }
         initListeners()
@@ -40,50 +53,39 @@ class SignUpActivity : AppCompatActivity() {
     private fun initListeners() = with(binding) {
         btnSignUp.setOnClickListener {
             val name = etSignUpName.text.toString().trim()
-            val email = etSignUpEmail.text.toString().trim()
-            val password = etSignUpPassword.text.toString().trim()
+            email = etSignUpEmail.text.toString().trim()
+            password = etSignUpPassword.text.toString().trim()
 
-            if(name.isEmpty() || email.isEmpty() || password.isEmpty()) {
+            if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this@SignUpActivity, "모든 정보를 입력해주세요.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
+            // remote (api)
             authViewModel.signup(name = name, email = email, password = password)
-//            if(etSignUpEmail.text.isBlank() || etSignUpPassword.text.isBlank()) {
-//                Toast.makeText(this@SignUpActivity, "정보를 다 입력하지 않았습니다.", Toast.LENGTH_SHORT).show()
-//            } else {
-//                val database = UserDatabase.getInstance(context = this@SignUpActivity)
-//                val userDao = database.userDao
-//
-//                // 메인 스레드가 아닌 UI 스레드에서 DB 작업 실행
-//                CoroutineScope(Dispatchers.IO).launch {
-//                    val email = etSignUpEmail.text.trim().toString()
-//                    val password = etSignUpPassword.text.trim().toString()
-//                    val user: UserEntity? = userDao.getUserByEmail(email = email)
-//                    if(user == null) {
-//                        userDao.insertUser(user = UserEntity(email = email, password = password))
-//                        withContext(Dispatchers.Main) {
-//                            Toast.makeText(this@SignUpActivity, "회원가입이 완료되었습니다.", Toast.LENGTH_SHORT).show()
-//                            finish()
-//                        }
-//                    } else {
-//                        withContext(Dispatchers.Main) {
-//                            Toast.makeText(this@SignUpActivity, "중복된 아이디가 이미 존재합니다.", Toast.LENGTH_SHORT).show()
-//                        }
-//                    }
-//                }
-//            }
         }
     }
+
 
     private fun initObservers() = with(binding) {
         authViewModel.signupResult.observe(this@SignUpActivity) { result ->
             result.onSuccess { data ->
-                Toast.makeText(this@SignUpActivity, "회원가입에 성공했습니다.", Toast.LENGTH_SHORT).show()
-                authViewModel.memberId = data.memberId
+                // data가 가지고 있는 정보 → memberId: Int
+                authViewModel.insertUser(email = email, password = password)
             }.onFailure { error ->
+                // 네트워크 불안정, 중복 회원가입
                 val message = error.message ?: "알 수 없는 오류가 발생했습니다."
-                Toast.makeText(this@SignUpActivity, "회원가입 실패: $message", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@SignUpActivity, "회원가입에 실패: $message", Toast.LENGTH_SHORT).show()
+            }
+        }
+        authViewModel.insertUserResult.observe(this@SignUpActivity) { result ->
+            result.onSuccess {
+                Toast.makeText(
+                    this@SignUpActivity,
+                    "회원가입이 완료되었습니다.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                finish() // 로그인 화면으로 돌아가기
             }
         }
     }
