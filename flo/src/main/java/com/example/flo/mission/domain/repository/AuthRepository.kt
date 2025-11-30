@@ -4,7 +4,7 @@ import com.example.flo.mission.data.local.room.DatabaseModule.userDao
 import com.example.flo.mission.data.local.room.DatabaseModule.userPreference
 import com.example.flo.mission.data.local.room.entity.UserEntity
 import com.example.flo.mission.data.remote.NetworkService
-import com.example.flo.mission.data.remote.dto.LoginData
+import com.example.flo.mission.data.remote.dto.LoginResponse
 import com.example.flo.mission.data.remote.dto.LoginRequest
 import com.example.flo.mission.data.remote.dto.MemberIdResponse
 import com.example.flo.mission.data.remote.dto.SignUpRequest
@@ -46,11 +46,11 @@ class AuthRepository(private val networkService: NetworkService) {
     /**
      * 로그인 로직
      */
-    suspend fun remoteLogin(req: LoginRequest): Result<LoginData> = try {
+    suspend fun remoteLogin(req: LoginRequest): Result<LoginResponse> = try {
         val response = networkService.login(req = req)
-        if(response.isSuccessful) {
+        if (response.isSuccessful) {
             val body = response.body()
-            if(body == null) {
+            if (body == null) {
                 Result.failure(RuntimeException("response body is null"))
             } else if (body.data == null) {
                 Result.failure(RuntimeException("response is ok but data is null"))
@@ -66,7 +66,28 @@ class AuthRepository(private val networkService: NetworkService) {
     }
 
     fun localSaveUserId(memberId: Int) {
+        // shared preference에서 apply()는 예외를 발생시키지 않는다.
+        // try ~ catch 문으로 묶거나, Result<T> 로 래핑할 필요가 없다.
         userPreference.setUserId(id = memberId)
+    }
+
+    suspend fun testAccessToken(accessToken: String): Result<String> = try {
+        val token = if (accessToken.startsWith("Bearer ")) accessToken else "Bearer $accessToken"
+        val response = networkService.test(token = token)
+        if (response.isSuccessful) {
+            val body = response.body()
+            if(body == null) {
+                Result.failure(RuntimeException("Response body is null"))
+            } else if(body.data == null) {
+                Result.failure(RuntimeException("Response is ok but data is null"))
+            } else {
+                Result.success(body.data.result)
+            }
+        } else {
+            Result.failure(RuntimeException("HTTP ${response.code()}"))
+        }
+    } catch (e: Exception) {
+        Result.failure(e)
     }
 
     suspend fun changeInfo(accessToken: String, req: UpdateMemberRequest): Result<MemberIdResponse> = try {

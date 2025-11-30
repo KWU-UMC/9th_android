@@ -4,13 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.flo.mission.data.local.pref.UserPreference
-import com.example.flo.mission.data.remote.dto.LoginData
 import com.example.flo.mission.data.remote.dto.LoginRequest
+import com.example.flo.mission.data.remote.dto.LoginResponse
 import com.example.flo.mission.data.remote.dto.SignUpRequest
 import com.example.flo.mission.domain.model.SignupStatus
 import com.example.flo.mission.domain.repository.AuthRepository
-import com.example.flo.mission.presentation.auth.LoginActivity
 import kotlinx.coroutines.launch
 
 class AuthViewModel(private val repository: AuthRepository) : ViewModel() {
@@ -37,8 +35,8 @@ class AuthViewModel(private val repository: AuthRepository) : ViewModel() {
         }
     }
 
-    private val _loginResult = MutableLiveData<Result<Unit>>()
-    val loginResult: LiveData<Result<Unit>> = _loginResult
+    private val _loginResult = MutableLiveData<Result<LoginResponse>>()
+    val loginResult: LiveData<Result<LoginResponse>> = _loginResult
 
     fun login(email: String, password: String) {
         viewModelScope.launch {
@@ -46,11 +44,21 @@ class AuthViewModel(private val repository: AuthRepository) : ViewModel() {
             val result = repository.remoteLogin(req = request)
             result.onSuccess { data ->
                 repository.localSaveUserId(memberId = data.memberId)
-                _loginResult.postValue(Result.success(Unit))
+                _loginResult.postValue(result)
             }.onFailure { error ->
                 // 서버 로그인 실패
                 _loginResult.postValue(Result.failure(error))
             }
+        }
+    }
+
+    private val _testResult = MutableLiveData<Result<String>>()
+    val testResult: LiveData<Result<String>> = _testResult
+
+    fun test(accessToken: String) {
+        viewModelScope.launch {
+            val result = repository.testAccessToken(accessToken = accessToken)
+            _testResult.postValue(result)
         }
     }
 

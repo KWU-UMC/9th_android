@@ -20,7 +20,11 @@ data class AuthResponse<T>(
     val data: T? = null
 )
 
-data class LoginData(
+data class TestResponse(
+    val result: String
+)
+
+data class LoginResponse(
     val name: String,
     val memberId: Int,
     val accessToken: String

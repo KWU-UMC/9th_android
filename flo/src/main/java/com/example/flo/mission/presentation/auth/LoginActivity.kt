@@ -21,6 +21,7 @@ class LoginActivity : AppCompatActivity() {
     private val authViewModel: AuthViewModel by viewModels {
         AuthViewModelFactory(repository = AuthRepository(networkService = NetworkClient.networkService))
     }
+    private var accessToken: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,15 +58,27 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this@LoginActivity, SignUpActivity::class.java)
             startActivity(intent)
         }
+        btnTokenTest.setOnClickListener {
+            accessToken?.let {
+                authViewModel.test(accessToken = it)
+            } ?: Toast.makeText(this@LoginActivity, "로그인을 먼저 해주세요.", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun initObservers() = with(binding) {
         authViewModel.loginResult.observe(this@LoginActivity) { result ->
-            result.onSuccess {
+            result.onSuccess { response ->
+                accessToken = response.accessToken
                 Toast.makeText(this@LoginActivity, "로그인에 성공했습니다.", Toast.LENGTH_SHORT).show()
-                finish()
             }.onFailure { error ->
                 Toast.makeText(this@LoginActivity, "로그인 실패: ${error.message}", Toast.LENGTH_SHORT).show()
+            }
+        }
+        authViewModel.testResult.observe(this@LoginActivity) { result ->
+            result.onSuccess { testResult ->
+                tvTestResult.text = testResult
+            }.onFailure { error ->
+                Toast.makeText(this@LoginActivity, "테스트 실패: ${error.message}", Toast.LENGTH_SHORT).show()
             }
         }
     }
