@@ -13,6 +13,7 @@ import com.example.flo.mission.data.local.room.RoomDatabaseModule.userDao
 import com.example.flo.mission.data.local.room.database.UserDatabase
 import com.example.flo.mission.data.local.room.entity.UserEntity
 import com.example.flo.mission.data.remote.NetworkClient
+import com.example.flo.mission.domain.model.SignupStatus
 import com.example.flo.mission.domain.repository.AuthRepository
 import com.example.flo.mission.presentation.AuthViewModel
 import com.example.flo.mission.presentation.AuthViewModelFactory
@@ -27,8 +28,6 @@ class SignUpActivity : AppCompatActivity() {
     private val authViewModel: AuthViewModel by viewModels {
         AuthViewModelFactory(repository = AuthRepository(networkService = NetworkClient.networkService))
     }
-    private var email: String = ""
-    private var password: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,39 +52,36 @@ class SignUpActivity : AppCompatActivity() {
     private fun initListeners() = with(binding) {
         btnSignUp.setOnClickListener {
             val name = etSignUpName.text.toString().trim()
-            email = etSignUpEmail.text.toString().trim()
-            password = etSignUpPassword.text.toString().trim()
+            val email = etSignUpEmail.text.toString().trim()
+            val password = etSignUpPassword.text.toString().trim()
 
             if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this@SignUpActivity, "모든 정보를 입력해주세요.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-
-            // remote (api)
             authViewModel.signup(name = name, email = email, password = password)
         }
     }
 
 
     private fun initObservers() = with(binding) {
-        authViewModel.signupResult.observe(this@SignUpActivity) { result ->
-            result.onSuccess { data ->
-                // data가 가지고 있는 정보 → memberId: Int
-                authViewModel.insertUser(email = email, password = password)
-            }.onFailure { error ->
-                // 네트워크 불안정, 중복 회원가입
-                val message = error.message ?: "알 수 없는 오류가 발생했습니다."
-                Toast.makeText(this@SignUpActivity, "회원가입에 실패: $message", Toast.LENGTH_SHORT).show()
-            }
-        }
-        authViewModel.insertUserResult.observe(this@SignUpActivity) { result ->
-            result.onSuccess {
-                Toast.makeText(
-                    this@SignUpActivity,
-                    "회원가입이 완료되었습니다.",
-                    Toast.LENGTH_SHORT
-                ).show()
-                finish() // 로그인 화면으로 돌아가기
+        authViewModel.signupResult.observe(this@SignUpActivity) { status ->
+            when(status) {
+                is SignupStatus.Success -> {
+                    Toast.makeText(
+                        this@SignUpActivity,
+                        "회원가입이 완료되었습니다.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    finish()
+                }
+                is SignupStatus.RemoteError -> {
+                    Toast.makeText(this@SignUpActivity, "회원가입에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                }
+                is SignupStatus.LocalError -> {
+                    Toast.makeText(this@SignUpActivity, "서버에는 저장 됐지만 내부 저장소 저장에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                    finish()
+                }
             }
         }
     }

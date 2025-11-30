@@ -8,30 +8,32 @@ import com.example.flo.mission.data.remote.dto.LoginData
 import com.example.flo.mission.data.remote.dto.LoginRequest
 import com.example.flo.mission.data.remote.dto.MemberIdResponse
 import com.example.flo.mission.data.remote.dto.SignUpRequest
+import com.example.flo.mission.domain.model.SignupStatus
 import com.example.flo.mission.domain.repository.AuthRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class AuthViewModel(private val repository: AuthRepository): ViewModel() {
+class AuthViewModel(private val repository: AuthRepository) : ViewModel() {
 
-    private val _signupResult = MutableLiveData<Result<MemberIdResponse>>()
-    val signupResult: LiveData<Result<MemberIdResponse>> = _signupResult
+    private val _signupResult = MutableLiveData<SignupStatus>()
+    val signupResult: LiveData<SignupStatus> = _signupResult
 
     fun signup(name: String, email: String, password: String) {
         viewModelScope.launch {
             val request = SignUpRequest(name = name, email = email, password = password)
             val result = repository.remoteSignUp(req = request)
-            _signupResult.postValue(result)
-        }
-    }
-
-    private val _insertUserResult = MutableLiveData<Result<Unit>>()
-    val insertUserResult: LiveData<Result<Unit>> = _insertUserResult
-
-    fun insertUser(email: String, password: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val result = repository.localInsertUser(email = email, password = password)
-            _insertUserResult.postValue(result)
+            result.onSuccess { data ->
+                // data 에 memberId 들어 있는데 이걸로 뭐할지..?
+                val result = repository.localInsertUser(email = email, password = password)
+                result.onSuccess {
+                    _signupResult.postValue(SignupStatus.Success)
+                }.onFailure { error ->
+                    _signupResult.postValue(SignupStatus.LocalError(error))
+                }
+            }.onFailure { error ->
+                // 서버 등록에 실패한 경우
+                _signupResult.postValue(SignupStatus.RemoteError(error))
+            }
         }
     }
 
