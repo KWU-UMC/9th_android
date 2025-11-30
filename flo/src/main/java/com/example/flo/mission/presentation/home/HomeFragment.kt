@@ -9,7 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.flo.R
 import com.example.flo.databinding.FragmentHomeBinding
-import com.example.flo.mission.data.local.room.RoomDatabaseModule
+import com.example.flo.mission.data.local.room.DatabaseModule
 import com.example.flo.mission.presentation.MusicViewModel
 import com.example.flo.mission.presentation.MusicViewModelFactory
 import kotlinx.coroutines.CoroutineScope
@@ -23,7 +23,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private var job: Job? = null
 
     private val musicViewModel: MusicViewModel by activityViewModels {
-        MusicViewModelFactory(albumDao = RoomDatabaseModule.albumDao, songDao = RoomDatabaseModule.songDao)
+        MusicViewModelFactory(albumDao = DatabaseModule.albumDao, songDao = DatabaseModule.songDao)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

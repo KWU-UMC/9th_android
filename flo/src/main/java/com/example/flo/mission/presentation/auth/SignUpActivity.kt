@@ -9,18 +9,11 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.flo.R
 import com.example.flo.databinding.ActivitySignUpBinding
-import com.example.flo.mission.data.local.room.RoomDatabaseModule.userDao
-import com.example.flo.mission.data.local.room.database.UserDatabase
-import com.example.flo.mission.data.local.room.entity.UserEntity
 import com.example.flo.mission.data.remote.NetworkClient
 import com.example.flo.mission.domain.model.SignupStatus
 import com.example.flo.mission.domain.repository.AuthRepository
 import com.example.flo.mission.presentation.AuthViewModel
 import com.example.flo.mission.presentation.AuthViewModelFactory
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class SignUpActivity : AppCompatActivity() {
 
