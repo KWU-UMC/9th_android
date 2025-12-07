@@ -40,10 +40,19 @@
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:backgroundTint="@color/primary"
-        android:text="로그인"
+        android:background="@drawable/bg_login"
+        android:text="서버 로그인"
+        android:textSize="18sp"
         android:textColor="@color/white"
         android:layout_marginTop="32dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSocialLogin"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/ic_kakao_login"/>
+
     <TextView
         android:id="@+id/tvGoToSignUp"
         android:layout_width="wrap_content"
@@ -54,19 +63,56 @@
         android:layout_gravity="end"
         android:layout_marginTop="12dp"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnTokenTest"
+    <LinearLayout
+        android:id="@+id/llSocialLoginInfo"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:backgroundTint="@color/gray_700"
-        android:text="Token 테스트"
-        android:textColor="@color/white"
-        android:layout_marginTop="32dp"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="12dp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:orientation="vertical"
+        android:padding="12dp"
+        android:gravity="center_horizontal">
 
-    <TextView
-        android:id="@+id/tvTestResult"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"/>
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivSocialProfile"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            tools:src="@drawable/img_we_don_t_talk_anymore"
+            app:shapeAppearanceOverlay="@style/CircularShape"/>
+
+        <TextView
+            android:id="@+id/tvSocialId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="아이디: 1234"
+            android:layout_marginTop="12dp"/>
+
+        <TextView
+            android:id="@+id/tvSocialNickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="닉네임: 1234"
+            android:layout_marginTop="4dp"/>
+
+        <TextView
+            android:id="@+id/tvSocialEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="이메일: 1234"
+            android:layout_marginTop="4dp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSocialLogout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_login"
+            android:text="카카오 로그아웃"
+            android:textSize="18sp"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
 
 </LinearLayout>

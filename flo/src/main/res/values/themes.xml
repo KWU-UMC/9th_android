@@ -26,4 +26,10 @@
         <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_logo</item>
         <item name="postSplashScreenTheme">@style/Theme.UMCAndroidWorkBook</item>
     </style>
+
+    <!-- Circular Image style -->
+    <style name="CircularShape" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>

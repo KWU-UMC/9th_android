@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.konan.properties.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -18,13 +20,19 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        val properties = Properties().apply {
+            load(project.rootProject.file("local.properties").inputStream())
+        }
+        val kakaoNativeAppKey = properties.getProperty("KAKAO_NATIVE_APP_KEY") // local.properties에서 카카오 네이티브 앱 키 불러오기
+        addManifestPlaceholders(mapOf("kakaoScheme" to "kakao${kakaoNativeAppKey}")) // 카카오 네이티브 앱 키를 manifest에 값 주입
+        buildConfigField("String", "KAKAO_NATIVE_APP_KEY", "\"${kakaoNativeAppKey}\"") // 카카오 네이티브 앱 키를 BuildConfig 클래스에 주입
     }
 
     buildFeatures {
         dataBinding = true
         viewBinding = true
+        buildConfig = true
     }
 
     buildTypes {
@@ -74,4 +82,6 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
     kapt(libs.androidx.room.compiler)
+    implementation(libs.v2.user) // 카카오 로그인 API
+    implementation(libs.glide) // glide
 }
