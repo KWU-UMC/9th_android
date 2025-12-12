@@ -1,0 +1,23 @@
+package com.example.flo.mission.data.local.room.dao
+
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.Query
+import androidx.room.Update
+import com.example.flo.mission.data.local.room.entity.AlbumEntity
+
+@Dao
+interface AlbumDao {
+    @Insert
+    fun insertAlbum(album: AlbumEntity): Long
+
+    @Query("SELECT * FROM AlbumTable")
+    fun getAllAlbums(): List<AlbumEntity>
+
+    @Update
+    fun updateAlbum(album: AlbumEntity)
+
+    @Delete
+    fun deleteAlbum(album: AlbumEntity)
+}

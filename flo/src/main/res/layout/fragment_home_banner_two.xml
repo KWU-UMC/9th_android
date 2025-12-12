@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/img_home_banner_two_music_background"
+    android:padding="16dp"
+    tools:context=".home.HomeBannerTwoFragment">
+
+    <ImageView
+        android:id="@+id/ivBannerThreeMusicSetting"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_setting"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivBannerThreeMusicPassTicket"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="24dp"
+        android:src="@drawable/ic_ticket"
+        app:layout_constraintBottom_toBottomOf="@id/ivBannerThreeMusicSetting"
+        app:layout_constraintEnd_toStartOf="@id/ivBannerThreeMusicSetting"
+        app:layout_constraintTop_toTopOf="@id/ivBannerThreeMusicSetting" />
+
+    <ImageView
+        android:id="@+id/ivBannerThreeMusicMicrophone"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="24dp"
+        android:src="@drawable/ic_microphone"
+        app:layout_constraintBottom_toBottomOf="@id/ivBannerThreeMusicPassTicket"
+        app:layout_constraintEnd_toStartOf="@id/ivBannerThreeMusicPassTicket"
+        app:layout_constraintTop_toTopOf="@id/ivBannerThreeMusicPassTicket" />
+
+    <TextView
+        android:id="@+id/tvBannerThreeMainTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="아침의 조깅 운동"
+        android:textColor="#FFFFFF"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivBannerThreeMusicMicrophone" />
+
+    <TextView
+        android:id="@+id/tvBannerThreeSubTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="총 2곡 2025.10.01"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@id/tvBannerThreeMainTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvBannerThreeMainTitle" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvMusicAlbumOne"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="8dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="0dp"
+        app:layout_constraintStart_toStartOf="@id/tvBannerThreeSubTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvBannerThreeSubTitle">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_home_banner_two_album_one" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/tvBannerThreeMusicAlbumOneTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="Run!"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/tvBannerThreeMusicAlbumOneSinger"
+        app:layout_constraintStart_toEndOf="@id/cvMusicAlbumOne"
+        app:layout_constraintTop_toTopOf="@id/cvMusicAlbumOne"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/tvBannerThreeMusicAlbumOneSinger"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Alexander"
+        android:textColor="@color/white"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="@id/cvMusicAlbumOne"
+        app:layout_constraintStart_toStartOf="@id/tvBannerThreeMusicAlbumOneTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvBannerThreeMusicAlbumOneTitle" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvMusicAlbumTwo"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="0dp"
+        app:layout_constraintStart_toStartOf="@id/cvMusicAlbumOne"
+        app:layout_constraintTop_toBottomOf="@id/cvMusicAlbumOne">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_home_banner_two_album_two" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/tvBannerThreeMusicAlbumTwoTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="Hey! Exercise"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/tvBannerThreeMusicAlbumTwoSinger"
+        app:layout_constraintStart_toEndOf="@id/cvMusicAlbumTwo"
+        app:layout_constraintTop_toTopOf="@id/cvMusicAlbumTwo"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/tvBannerThreeMusicAlbumTwoSinger"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Taylor Kinya"
+        android:textColor="@color/white"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="@id/cvMusicAlbumTwo"
+        app:layout_constraintStart_toStartOf="@id/tvBannerThreeMusicAlbumTwoTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvBannerThreeMusicAlbumTwoTitle" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

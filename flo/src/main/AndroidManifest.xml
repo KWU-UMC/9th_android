@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:name=".mission.presentation.MyApplication"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.UMCAndroidWorkBook"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".mission.presentation.auth.LoginActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".mission.presentation.auth.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".study.PracticeActivity"
+            android:exported="true" />
+        <activity
+            android:name=".mission.presentation.SongDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".mission.presentation.MainActivity"
+            android:exported="true"
+            android:theme="@style/SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.kakao.sdk.auth.AppsHandlerActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="oauth" android:scheme="${kakaoScheme}"/> <!-- 리다이렉트 URI: "kakao${NATIVE_APP_KEY}://oauth" -->
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
